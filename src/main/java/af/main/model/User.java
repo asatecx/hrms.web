@@ -6,7 +6,7 @@ import af.base.model.BaseDataModel;
 import af.base.orm.annotation.Column;
 import af.base.orm.annotation.Table;
 
-@Table(name = "T_PF_SYS_USER", schema = "${commonSchema}")
+@Table(name = "T_USER", schema = "${commonSchema}")
 public class User extends BaseDataModel {
 
     private static final long serialVersionUID = -6904741621609174058L;

@@ -4,7 +4,7 @@
 <configuration>
 
     <properties>
-        <property name='commonSchema' value='LICAUTHV2C'/>
+        <property name='commonSchema' value='hrmsdb01'/>
         <property name='xxxxxxSchema' value='XXXXXXXXXX'/>
     </properties>
 
