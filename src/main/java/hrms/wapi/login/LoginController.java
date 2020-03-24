@@ -102,7 +102,13 @@ public class LoginController extends BaseController {
 //        roles.forEach(r -> roleIds.add(Constants.COMPANY_COMMOM.equals(r.getCOMPANY_ID()) ? Constants.COMPANY_COMMOM + r.getBIZ_ROLE_ID() : r.getBIZ_ROLE_ID()));
 
         Map<String, Object> dtDetail = new HashMap<String, Object>();
-//        dtDetail.put("ActualUserID", user.getUSER_ID());
+        if("1".equals(user.getUSER_TYPE())) {
+        	dtDetail.put("userId", user.getUSER_ID());
+        }else {
+        	dtDetail.put("companyId", user.getUSER_ID());
+        }
+        dtDetail.put("userType", user.getUSER_TYPE());
+//        dtDetail.put("userId", user.getUSER_ID());
 //        dtDetail.put("ActualCompanyID", company.getCOMPANY_ID());
 //        dtDetail.put("UserID", user.getUSER_ID());
 //        dtDetail.put("UserType", user.getUSER_TYPE());
@@ -111,8 +117,8 @@ public class LoginController extends BaseController {
 //        dtDetail.put("CompanyId", user.getCOMPANY_ID());
 //        dtDetail.put("Mail", user.getMAIL());
 //        dtDetail.put("RoleIDs", roleIds);
-        //dtDetail.put("Roles", roles);
-        //dtDetail.put("Sections", sections);
+//        dtDetail.put("Roles", roles);
+//        dtDetail.put("Sections", sections);
 //        dtDetail.put("UserName", user.getUSER_DISPLAY_NAME());
 
 //        List<FuncRoleItem> funcRoleItems = loginService.getFunRoleList(userId);
