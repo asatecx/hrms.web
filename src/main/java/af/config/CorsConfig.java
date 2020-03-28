@@ -2,6 +2,7 @@ package af.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
@@ -14,13 +15,14 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowedMethods("GET", "POST", "DELETE", "PUT") // 3 设置访问源请求方法
                 .maxAge(3600);
     }
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/**")
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/videos/**")
 //                .addResourceLocations("classpath:/static/")
 //                .addResourceLocations("classpath:/public/")
-//                .addResourceLocations("classpath:/resources/");
-//    }
+                .addResourceLocations("file:/home/hrms/videos/");
+//        		.addResourceLocations("file:/C:/E/yule/Adt/");
+    }
 //    @Bean
 //    public CorsFilter corsFilter() {
 //        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
