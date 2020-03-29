@@ -74,7 +74,9 @@ dependencies {
 	compile group: 'org.projectlombok', name: 'lombok', version: '1.18.10'
 	annotationProcessor "org.projectlombok:lombok:1.18.10"
 //	compile group: 'org.springframework.boot', name: 'spring-boot-devtools'
-
+	compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13'
+	compile group: 'com.itextpdf.tool', name: 'xmlworker', version: '5.5.13'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-freemarker', version: '2.2.6.RELEASE'
 
     compile files("lib/af.java.base-1.0.0-SNAPSHOT.jar")
 //    compile files("lib/ojdbc6.jar")

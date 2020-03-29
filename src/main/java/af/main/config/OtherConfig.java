@@ -15,6 +15,7 @@ import com.hazelcast.config.MaxSizeConfig;
 //import af.base.service.AmazonS3Service;
 import af.base.service.CsvReportService;
 import af.base.service.ExcelReportService;
+import af.base.service.PdfReportService;
 
 /*************************************************************************
  * Copyright     Asatecx Co.,Ltd.<br/>
@@ -58,19 +59,19 @@ public class OtherConfig {
 //        return mailService;
 //    }
 //
-//    /**
-//     * PDFレポートサービス
-//     * @return PDFレポートサービス
-//     */
-//    @Autowired
-//    @Bean("main.pdfReportService")
-//    public PdfReportService pdfReportService() {
-//        PdfReportService pdfReportService = new PdfReportService();
-//        pdfReportService.setTemplateFolder("classpath:af/main/pdfTemplate");
-//        pdfReportService.setJasperFolder("C:/pfj/pdf/jasper");
-//        pdfReportService.setExportFolder("C:/pfj/pdf/out");
-//        return pdfReportService;
-//    }
+    /**
+     * PDFレポートサービス
+     * @return PDFレポートサービス
+     */
+    @Autowired
+    @Bean("main.pdfReportService")
+    public PdfReportService pdfReportService() {
+        PdfReportService pdfReportService = new PdfReportService();
+        pdfReportService.setTemplateFolder("classpath:af/main/pdfTemplate");
+        pdfReportService.setFont("classpath:af/main/font/simhei.ttf");
+        pdfReportService.setExportFolder(env.getProperty("pdf.tmp.path"));
+        return pdfReportService;
+    }
 
     /**
      * Excelレポートサービス
