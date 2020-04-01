@@ -1,9 +1,15 @@
 package af.main.config;
 
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
@@ -16,6 +22,7 @@ import com.hazelcast.config.MaxSizeConfig;
 import af.base.service.CsvReportService;
 import af.base.service.ExcelReportService;
 import af.base.service.PdfReportService;
+import af.base.util.FileUtil;
 
 /*************************************************************************
  * Copyright     Asatecx Co.,Ltd.<br/>
@@ -68,9 +75,25 @@ public class OtherConfig {
     public PdfReportService pdfReportService() {
         PdfReportService pdfReportService = new PdfReportService();
         pdfReportService.setTemplateFolder("classpath:af/main/pdfTemplate");
-        pdfReportService.setFont("classpath:af/main/font/simhei.ttf");
+        pdfReportService.setFont("classpath:af/main/font");
         pdfReportService.setExportFolder(env.getProperty("pdf.tmp.path"));
+
         return pdfReportService;
+    }
+    @PostConstruct
+    public void testInit() {
+    	InputStream is = null;
+        try {
+//        	is = ApplicationContextUtil.getContext().getResource("classpath:af/main/font"+"/simhei.ttf").getInputStream();
+        	ClassPathResource resource = new ClassPathResource("af/main/font/simhei.ttf");
+        	is = resource.getInputStream();
+            FileUtil.inputStreamToFile(is, env.getProperty("pdf.tmp.path")+"/simhei.ttf");
+            is.close();
+        }catch(IOException e) {
+        	e.printStackTrace();
+        }finally {
+        	if (is != null) try { is.close(); } catch(Exception ignore) {}
+        }
     }
 
     /**

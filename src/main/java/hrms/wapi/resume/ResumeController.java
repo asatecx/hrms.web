@@ -1,9 +1,12 @@
 package hrms.wapi.resume;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,11 +46,19 @@ public class ResumeController extends BaseController  {
         data.put("name", "kevin");
         String content = pdfReportService.freeMarkerRender(data, "freemarker.ftl");
         //创建pdf
+//        getResource("classpath:af/main/font/simhei.ttf");
         String dest = pdfReportService.createPdf(content, "test.pdf");
         // 读取pdf并预览
         readPdf(response, dest);
     }
-
+    public void getResource(String filePath) throws IOException{
+        //返回读取指定资源的输入流
+        InputStream is=this.getClass().getResourceAsStream(filePath);
+        BufferedReader br=new BufferedReader(new InputStreamReader(is));
+        String s="";
+        while((s=br.readLine())!=null)
+            System.out.println(s);
+    }
     /**
      * 读取本地pdf,这里设置的是预览
      */
