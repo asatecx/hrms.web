@@ -3,6 +3,7 @@ package hrms.wapi.company;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import af.main.model.Login;
 import af.main.model.User;
 import hrms.model.Company;
 import hrms.model.Constants;
@@ -26,11 +27,12 @@ public class CompanyService extends HrmsSimpleDaoService {
      * @return boolean
      */
 	@Transactional("hrms.tx")
-	public boolean registCompany(Company company) {
-		Company checkCompany = super.find(company);
-		if (checkCompany != null) {
+	public boolean registCompany(Company company, Login login) {
+		Login checkUser = super.find(login);
+		if (checkUser != null) {
 			return false;
 		}
+		super.insert(true, login);
 		super.insert(true, company);
 		return true;
 	}

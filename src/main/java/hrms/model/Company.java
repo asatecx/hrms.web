@@ -12,7 +12,9 @@ public class Company extends BaseDataModel {
 
     private String userId;
 
-    private String userName;
+    private String userNameFirst;
+
+    private String userNameLast;
 
     private String userNameDisp;
 

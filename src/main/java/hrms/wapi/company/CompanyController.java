@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import af.base.controller.BaseController;
 import af.base.model.JsonModel;
+import af.main.model.Login;
 import hrms.model.Company;
 
 /*************************************************************************
@@ -32,13 +33,19 @@ public class CompanyController extends BaseController  {
 
     @RequestMapping(value = "/company/regist", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)
     public JsonModel regist(@RequestBody Map<String, Object> param) throws Exception {
-
     	Company company = new Company();
     	BeanUtils.populate(company, param);
     	company.setUserId(company.getMail());
-    	boolean ret = companyService.registCompany(company);
+
+    	Login login = new Login();
+    	login.setUSER_ID(company.getUserId());
+    	login.setPASSWORD(company.getPassword());
+    	login.setUSER_TYPE("2");
+    	login.setVALID_FLG("1");
+
+    	boolean ret = companyService.registCompany(company, login);
     	if (!ret) {
-            return new JsonModel(false, "会社登録失敗。");
+            return new JsonModel(false, "会社重複登録");
         }
         return new JsonModel(true, "会社登録成功。");
     }

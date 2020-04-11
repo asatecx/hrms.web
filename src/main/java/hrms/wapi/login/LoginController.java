@@ -18,11 +18,7 @@ import af.base.model.ClientInformation;
 import af.base.model.JsonModel;
 import af.base.orm.annotation.ClientDetail;
 import af.base.util.InputCheckUtil;
-import af.main.model.User;
-//import af.main.auth.PFAuthData;
-//import af.main.auth.PFAuthenticationToken;
-//import af.main.model.BizRole;
-//import af.main.model.FuncRoleItem;
+import af.main.model.Login;
 
 /*************************************************************************
  * Copyright     Asatecx Co.,Ltd.<br/>
@@ -64,14 +60,14 @@ public class LoginController extends BaseController {
         String password = map.get("password");
 
         // ユーザー情報取得
-        User user = loginService.getUser(userId);
+        Login user = loginService.getUser(userId);
         if (user == null) {
             return new JsonModel(false, this.getMessage("main.login.error.mailPwd"));
         }
 
         // vパスワードチェック
 //      if (!StringUtil.digestMessage(password, userId).equals(user.getUSER_PASSWORD())) {
-        if (!password.equals(user.getUSER_PASSWORD())) {
+        if (!password.equals(user.getPASSWORD())) {
 
             // ログイン失敗履歴追加
 //            this.loginService.recordLoginFail(userId,client.getClientID(), client.getClientIP());
