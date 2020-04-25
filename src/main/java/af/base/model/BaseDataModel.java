@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import af.base.model.LoginInfo;
 import af.base.orm.annotation.Column;
 
 public class BaseDataModel implements Serializable {
@@ -80,17 +79,17 @@ public class BaseDataModel implements Serializable {
         this.UPDATE_DATE_TIME = UPDATE_DATE_TIME;
     }
 
-    public void setBaseInfo(LoginInfo loginInfo, String locale) {
+    public void setBaseInfo(String loginUserId, String locale) {
         if (UPDATE_DATE_TIME == null) {
-            CREATE_USER = loginInfo.getUserId();
+            CREATE_USER = loginUserId;
             UPDATE_USER = CREATE_USER;
-            CREATED_BY = loginInfo.getActualUserId();
+            CREATED_BY = loginUserId;
             UPDATED_BY = CREATED_BY;
             CREATE_DATE_TIME = new Date();
             UPDATE_DATE_TIME = new Timestamp(CREATE_DATE_TIME.getTime());
         } else {
-            UPDATE_USER = loginInfo.getUserId();
-            UPDATED_BY = loginInfo.getActualUserId();
+            UPDATE_USER = loginUserId;
+            UPDATED_BY = loginUserId;
         }
     }
 }

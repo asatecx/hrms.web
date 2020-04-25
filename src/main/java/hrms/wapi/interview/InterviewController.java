@@ -35,6 +35,8 @@ public class InterviewController extends BaseController  {
 
     	Interview interview = new Interview();
     	BeanUtils.populate(interview, param);
+    	interview.setBaseInfo(interview.getCompanyId(), null);
+    	interview.setInterviewresult("1");
     	boolean ret = interviewService.registInterview(interview);
     	if (!ret) {
             return new JsonModel(false, "面談予約失敗しました。");
