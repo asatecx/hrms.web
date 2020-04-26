@@ -9,7 +9,7 @@ import hrms.model.Constants;
 
 /*************************************************************************
  * Copyright     Asatecx Co.,Ltd.<br/>
- * Package       pf.main.wapi.login<br/>
+ * Package       af.main.wapi.login<br/>
  * Class         LoginService<br/>
  * Summary       ログインサービス<br/>
  * <br/>

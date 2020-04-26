@@ -1,11 +1,13 @@
 package hrms.wapi.interview;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import af.main.model.User;
 import hrms.model.Company;
-import hrms.model.Constants;
 import hrms.model.Interview;
 import hrms.wapi.base.HrmsSimpleDaoService;
 
@@ -40,18 +42,11 @@ public class InterviewService extends HrmsSimpleDaoService {
      * @param userId
      * @return user
      */
-    public User getUser(String userId) {
-        User user = new User();
-        user.setUSER_ID(userId);
-        user = super.find(user);
-        if (user != null) {
-            if (!Constants.VALID_FLG_TRUE.equals(user.getVALID_FLG())) {
-                user = null;
-            } else {
-                // TODO Somethig
-            }
-        }
-        return user;
+    public List<Interview> getInterviewList(String companyId) {
+    	Map<String, String> param = new HashMap<String, String>();
+    	param.put("companyId", companyId);
+//    	List<Map<String, String>> xxx = baseDao.selectList("hrms.company.selectInterviewList", param, null);
+        return baseDao.selectList("hrms.company.selectInterviewList", param, null);
     }
 
     /**
