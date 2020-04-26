@@ -1,4 +1,4 @@
-package htms.wapi.person;
+package hrms.wapi.person;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -32,7 +32,7 @@ import hrms.model.caseobj;
 @RestController
 @RequestMapping("/niucaocao")
 public class HeroController {
-	@Resource
+
 	//private HeroService heroService;
 	public String useridString;
 	/**
