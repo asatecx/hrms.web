@@ -1,5 +1,6 @@
 package hrms.wapi.interview;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import af.base.controller.BaseController;
 import af.base.model.JsonModel;
+import af.base.model.JsonModelTable;
 import hrms.model.Interview;
 
 /*************************************************************************
@@ -42,6 +44,13 @@ public class InterviewController extends BaseController  {
             return new JsonModel(false, "面談予約失敗しました。");
         }
         return new JsonModel(true, "面談予約成功しました。");
+    }
+
+    @RequestMapping(value = "/interview/interviewlist", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)
+    public JsonModel getInterviewList(@RequestBody Map<String, Object> param) throws Exception {
+    	String companyId = (String)param.get("companyId");
+    	List<Interview> interviewList = interviewService.getInterviewList(companyId);
+    	return new JsonModelTable(interviewList.size(), interviewList);
     }
 
 }
