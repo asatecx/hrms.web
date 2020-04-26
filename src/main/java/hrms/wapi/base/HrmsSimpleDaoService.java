@@ -11,7 +11,7 @@ import af.base.dao.BaseDao;
 public class HrmsSimpleDaoService {
 
     @Autowired
-    @Qualifier("main.baseDao")
+    @Qualifier("hrms.baseDao")
     protected BaseDao baseDao;
 
     public void setBaseDao(BaseDao baseDao) {
