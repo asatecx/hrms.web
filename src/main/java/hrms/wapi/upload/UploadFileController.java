@@ -1,7 +1,12 @@
 package hrms.wapi.upload;
 
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,6 +17,7 @@ import java.util.Date;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,6 +58,54 @@ public class UploadFileController extends BaseController {
         Files.copy(uploadfile.getInputStream(), tmPath, StandardCopyOption.REPLACE_EXISTING);
 
         return new JsonModel(true, this.getMessage("main.insert.ok"));
+    }
+    
+    @CrossOrigin
+	    @RequestMapping(value = "/headphoto", method = RequestMethod.POST)
+	    public void uploadheadphoto(@RequestParam MultipartFile file ,@RequestParam String username ) {
+	    	System.out.println(file.getOriginalFilename());
+	    	System.out.println(file.getContentType());
+	    	System.out.println(username);
+	        // ファイルが空の場合は異常終了
+	        if(file.isEmpty()){
+	            // 異常終了時の処理
+	        }
+	        //file.upload.photo
+	        
+	        String path=environment.getProperty("file.upload.photo");
+	        try {
+		            Path destpath= Paths.get(path+username+".jpg");
+		            System.out.println(destpath);
+		            Files.copy(file.getInputStream(), destpath, StandardCopyOption.REPLACE_EXISTING);
+	        } catch (Exception e) {
+	            // 異常終了時の処理
+	        	System.out.println(e);
+	        } catch (Throwable t) {
+	            // 異常終了時の処理
+	        }
+	    }
+    @CrossOrigin
+    @RequestMapping(value = "/video", method = RequestMethod.POST)
+    public void uploadAppealVideo(@RequestParam MultipartFile file ,@RequestParam String username ) {
+    	System.out.println(file.getOriginalFilename());
+    	System.out.println(file.getContentType());
+    	System.out.println(username);
+        // ファイルが空の場合は異常終了
+        if(file.isEmpty()){
+            // 異常終了時の処理
+        }
+        
+        String path=environment.getProperty("file.upload.video");
+        try {
+	            Path destpath= Paths.get(path+username+".mp4");
+	            System.out.println(destpath);
+	            Files.copy(file.getInputStream(), destpath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (Exception e) {
+            // 異常終了時の処理
+        	System.out.println(e);
+        } catch (Throwable t) {
+            // 異常終了時の処理
+        }
     }
 
 }
