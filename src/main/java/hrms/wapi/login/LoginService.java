@@ -3,7 +3,7 @@ package hrms.wapi.login;
 import org.springframework.stereotype.Service;
 
 import af.base.service.BaseService;
-import af.main.model.User;
+import af.main.model.Login;
 import hrms.model.Company;
 import hrms.model.Constants;
 
@@ -23,8 +23,8 @@ public class LoginService extends BaseService {
      * @param userId
      * @return user
      */
-    public User getUser(String userId) {
-        User user = new User();
+    public Login getUser(String userId) {
+        Login user = new Login();
         user.setUSER_ID(userId);
         user = mainDao.find(user);
         if (user != null) {
