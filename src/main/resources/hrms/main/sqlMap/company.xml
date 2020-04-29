@@ -6,6 +6,13 @@
     <select id="selectInterviewList" parameterType="map" resultType="map">
       SELECT
           COMPANY_ID
+          ,PERSON_ID
+          ,CASE_NAME
+          ,WORK_PLACE
+          ,INTERVIEW_PLACE
+          ,CONCAT(INTERVIEW_DATE,' ',START_TIME,'～',END_TIME) AS INTERVIEW_DATETIME
+          ,WORK_CONTENTS
+          ,INTERVIEW_RESULT
       FROM
           T_B_INTERVIEW
       WHERE
