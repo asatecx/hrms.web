@@ -10,9 +10,18 @@
           ,CASE_NAME
           ,WORK_PLACE
           ,INTERVIEW_PLACE
+          ,INTERVIEW_DATE
+          ,START_TIME
+          ,END_TIME
           ,CONCAT(INTERVIEW_DATE,' ',START_TIME,'～',END_TIME) AS INTERVIEW_DATETIME
           ,WORK_CONTENTS
           ,INTERVIEW_RESULT
+          ,CREATE_USER
+          ,CREATE_DATE_TIME
+          ,UPDATE_USER
+          ,UPDATE_DATE_TIME
+          ,CREATED_BY
+          ,UPDATED_BY
       FROM
           T_B_INTERVIEW
       WHERE
