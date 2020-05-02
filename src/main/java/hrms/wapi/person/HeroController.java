@@ -182,8 +182,11 @@ public class HeroController {
 	     */
 	    @CrossOrigin
 	    @RequestMapping(value = "/interviewList", method = RequestMethod.GET)
-	    public List<InterviewResult> search(@RequestParam   String companyName) {
-	      List<InterviewResult> interviewResult =new ArrayList<InterviewResult>();
+	    public List<InterviewResult> search(@RequestParam   String companyName,@RequestParam   String userid,@RequestParam   String currentPage,@RequestParam   String pagesize) {
+	    	System.out.println("userid="+userid);
+	    	System.out.println("currentPage="+currentPage);
+	    	System.out.println("pagesize"+pagesize);
+	    	List<InterviewResult> interviewResult =new ArrayList<InterviewResult>();
 	      interviewResult.add(new InterviewResult("IBM",
 	    		  "2020-10-20 17:00",
 	    		  "please wear your suits",
@@ -242,7 +245,7 @@ public class HeroController {
 	     */
 	    @CrossOrigin
 	    @RequestMapping(value = "/gettopTen", method = RequestMethod.GET)
-	    public List<caseobj> getcaseobj(@RequestParam   String keyword) {
+	    public List<caseobj> getcaseobj(@RequestParam   String keyword,@RequestParam   String userid) {
 	      List<caseobj> interviewResult =new ArrayList<caseobj>();
 	      interviewResult.add(new caseobj(1,"4月開始、作業場所勝どき<br>日本語１級レベル<br>経験3年<br>java"));
 	      interviewResult.add(new caseobj(2,"6月開始、田町<br>日本語１級レベル<br>経験3年<br>java"));
@@ -337,7 +340,9 @@ public class HeroController {
 	    }
 	    @CrossOrigin
 	    @RequestMapping(value = "/getCaseList", method = RequestMethod.GET)
-	    public List<caseobj> getCaseList(@RequestParam   String keyword) {
+	    public List<caseobj> getCaseList(@RequestParam   String keyword,@RequestParam   String currentPage,@RequestParam   String pagesize) {
+	    	System.out.println("currentPage="+currentPage);
+	    	System.out.println("pagesize"+pagesize);
 	      List<caseobj> interviewResult =new ArrayList<caseobj>();
 	      interviewResult.add(new caseobj(1,"4月開始、作業場所勝どき<br>日本語１級レベル<br>経験3年<br>java"
 	    		  ,"1大手メディア企業向けシステム開発"
