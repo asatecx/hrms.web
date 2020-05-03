@@ -1,8 +1,6 @@
 package hrms.wapi.interview;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -61,21 +59,8 @@ public class InterviewController extends BaseController  {
     @RequestMapping(value = "/interview/update", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)
     public JsonModel update(@RequestBody Map<String, Object> param) throws Exception {
     	Interview interview = new Interview();
-//    	ConvertUtils.register(new SqlDateConverter(null), java.sql.Date.class);
-//    	ConvertUtils.register(new Converter() {
-//            public Object convert(Class type, Object value) {
-//                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.fffffffff");
-//                try {
-//                    return simpleDateFormat.parse(value.toString());
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                return null;
-//            }
-//        }, Date.class);
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     	SqlTimestampConverter converter = new SqlTimestampConverter(convertTimestamp((String)param.get("UPDATE_DATE_TIME")));
-		converter.setPattern("yyyy-MM-dd HH:mm:ss");
+//		converter.setPattern("yyyy-MM-dd HH:mm:ss.SSS");
 		ConvertUtils.register(converter, Timestamp.class);
     	BeanUtils.populate(interview, param);
     	interview.setBaseInfo(interview.getCompanyId(), null);
@@ -83,21 +68,23 @@ public class InterviewController extends BaseController  {
         return new JsonModel(true, "面談予約更新しました。");
     }
 
-    private Date convertDate(String oldDate) {
-    	Date date = null;
-        try {
-        	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS");
-            date = sdf.parse(oldDate);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return date;
-    }
+//    private Timestamp convertTimestamp(String before) {
+//    	Timestamp ts = null;
+//    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS+0000");
+//        try {
+//        	Date after = sdf.parse(before);
+//        	after.setTime(after.getTime() + 540*60*1000);
+//        	ts = new Timestamp(after.getTime());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return ts;
+//    }
 
-    private Timestamp convertTimestamp(String oldDate) {
+    private Timestamp convertTimestamp(String before) {
     	Timestamp ts = null;
         try {
-        	ts = Timestamp.valueOf(oldDate);
+        	ts = Timestamp.valueOf(before);
         } catch (Exception e) {
             e.printStackTrace();
         }
