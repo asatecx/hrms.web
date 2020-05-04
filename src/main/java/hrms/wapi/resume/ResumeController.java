@@ -76,17 +76,17 @@ public class ResumeController extends BaseController  {
 	private static Map<String,Object> createData(){
 		Map<String,Object> root=new HashMap<String,Object>();
 		User u1 = new User();
-        u1.setUserId("001");
-        u1.setValidFlg("1");
-        u1.setUserName("Aさん");
+//        u1.setUserId("001");
+//        u1.setValidFlg("1");
+//        u1.setUserName("Aさん");
         User u2 = new User();
-        u2.setUserId("002");
-        u2.setUserName("Bさん");
-        u2.setValidFlg("2");
+//        u2.setUserId("002");
+//        u2.setUserName("Bさん");
+//        u2.setValidFlg("2");
         User u3 = new User();
-        u3.setUserId("003");
-        u3.setUserName("Cさん");
-        u3.setValidFlg("3");
+//        u3.setUserId("003");
+//        u3.setUserName("Cさん");
+//        u3.setValidFlg("3");
         List<User> users = new ArrayList<User>();
         users.add(u1);
         users.add(u2);

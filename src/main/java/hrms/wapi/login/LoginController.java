@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ModelAttribute;
 //import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +20,6 @@ import af.base.model.ClientInformation;
 import af.base.model.JsonModel;
 import af.base.orm.annotation.ClientDetail;
 import af.base.util.InputCheckUtil;
-import af.main.model.Login;
-//import af.main.auth.PFAuthData;
-//import af.main.auth.PFAuthenticationToken;
-//import af.main.model.BizRole;
-//import af.main.model.FuncRoleItem;
 
 /*************************************************************************
  * Copyright     Asatecx Co.,Ltd.<br/>
@@ -64,14 +61,14 @@ public class LoginController extends BaseController {
         String password = map.get("password");
 
         // ユーザー情報取得
-        Login user = loginService.getUser(userId);
+        hrms.model.Login user = loginService.getUser(userId);
         if (user == null) {
             return new JsonModel(false, this.getMessage("main.login.error.mailPwd"));
         }
 
         // vパスワードチェック
 //      if (!StringUtil.digestMessage(password, userId).equals(user.getUSER_PASSWORD())) {
-        if (!password.equals(user.getPASSWORD())) {
+        if (!password.equals(user.getPassword())) {
 
             // ログイン失敗履歴追加
 //            this.loginService.recordLoginFail(userId,client.getClientID(), client.getClientIP());
@@ -102,12 +99,12 @@ public class LoginController extends BaseController {
 //        roles.forEach(r -> roleIds.add(Constants.COMPANY_COMMOM.equals(r.getCOMPANY_ID()) ? Constants.COMPANY_COMMOM + r.getBIZ_ROLE_ID() : r.getBIZ_ROLE_ID()));
 
         Map<String, Object> dtDetail = new HashMap<String, Object>();
-        if("1".equals(user.getUSER_TYPE())) {
-        	dtDetail.put("userId", user.getUSER_ID());
+        if("1".equals(user.getUserType())) {
+        	dtDetail.put("userId", user.getUserId());
         }else {
-        	dtDetail.put("companyId", user.getUSER_ID());
+        	dtDetail.put("companyId", user.getUserId());
         }
-        dtDetail.put("userType", user.getUSER_TYPE());
+        dtDetail.put("userType", user.getUserType());
 //        dtDetail.put("userId", user.getUSER_ID());
 //        dtDetail.put("ActualCompanyID", company.getCOMPANY_ID());
 //        dtDetail.put("UserID", user.getUSER_ID());
@@ -139,6 +136,13 @@ public class LoginController extends BaseController {
         dt.put("detail", dtDetail);
 
         return new JsonModel(dt);
+    }
+    
+    @CrossOrigin
+    @RequestMapping(value = "/main/makeAcount",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+    public String makeAcount(@ModelAttribute  hrms.model.Login loginUser) {
+    	return loginService.insertLoginUser(loginUser);
+
     }
 
 }
