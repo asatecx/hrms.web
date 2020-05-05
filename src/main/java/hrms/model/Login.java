@@ -1,15 +1,22 @@
 package hrms.model;
 
-public class Login {
-private int code;
+import af.base.model.BaseDataModel;
+import af.base.orm.annotation.Table;
+import lombok.Data;
 
-public int getCode() {
-	return code;
-}
+@Data
+@Table(name = "T_B_LOGIN", schema = "${commonSchema}")
+public class Login extends BaseDataModel {
 
-public void setCode(int code) {
-	this.code = code;
-}
+    private static final long serialVersionUID = -6904741621609174058L;
 
-	
+    private String userId;
+    private String userType;
+
+    private String password;
+
+    private String email;
+
+    private String validFlg;
+
 }
