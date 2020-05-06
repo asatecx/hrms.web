@@ -38,7 +38,11 @@
        ,USER_NAME_KANA
        ,USER_NAME_KANJI
        ,USER_NAME_ROMA
-       ,GENDER
+       ,CASE GENDER
+          WHEN '1' THEN '男'
+          WHEN '2' THEN '女'
+          ELSE '其他'
+        END AS GENDER
        ,BIRTHDAY
        ,ZIP_CODE
        ,ADDR_PREF
@@ -54,7 +58,12 @@
        ,WORK_EXP
        ,JAPAN_EXP
        ,COMPANY
-       ,CONTRACT_TYPE
+       ,CASE CONTRACT_TYPE
+          WHEN '1' THEN '自社'
+          WHEN '2' THEN '協力'
+          WHEN '3' THEN 'フリーランス'
+          ELSE 'その他'
+        END AS CONTRACT_TYPE
        ,STATUS
        ,PRICE_MIN
        ,PRICE_MAX
@@ -62,16 +71,23 @@
           T_B_PERSON_BASE
       WHERE
           1 = 1
-          <if test="contractType != null and contractType != ''">
-            AND CONTRACT_TYPE = #{contractType}
+          <if test="contractType != null and contractType.size > 0">
+            AND CONTRACT_TYPE IN
+          <foreach item="item" index="index" collection="contractType" open="(" separator="," close=")">
+            #{item}
+          </foreach>
           </if>
-          <if test="status != null and status != ''">
-            AND STATUS = #{status}
+
+          <if test="status != null and status.size > 0">
+            AND STATUS IN
+            <foreach item="item" index="index" collection="status" open="(" separator="," close=")">
+            #{item}
+          </foreach>
           </if>
-          <if test="gender != null and gender != ''">
+          <if test="gender != null and gender != '0'.toString()">
             AND GENDER = #{gender}
           </if>
-          <if test="country != null and country != ''">
+          <if test="country != null and country != '0'.toString()">
             AND COUNTRY = #{country}
           </if>
     </select>
