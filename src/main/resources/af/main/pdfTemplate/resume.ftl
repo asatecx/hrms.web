@@ -88,7 +88,7 @@
  <tr>
   <td align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.age}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.age} 歳<span><o:p></o:p></span></span></p>
   </td>
   <td align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>

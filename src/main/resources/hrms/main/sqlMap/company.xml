@@ -67,6 +67,8 @@
        ,STATUS
        ,PRICE_MIN
        ,PRICE_MAX
+       ,JAPANESELEVEL
+       ,GRADUATIONDATE
       FROM
           T_B_PERSON_BASE
       WHERE

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import af.base.controller.BaseController;
 import af.base.model.JsonModel;
 import af.base.model.JsonModelTable;
+import af.base.util.DateTimeUtil;
 import hrms.model.Interview;
 
 /*************************************************************************
@@ -59,7 +60,8 @@ public class InterviewController extends BaseController  {
     @RequestMapping(value = "/interview/update", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)
     public JsonModel update(@RequestBody Map<String, Object> param) throws Exception {
     	Interview interview = new Interview();
-    	SqlTimestampConverter converter = new SqlTimestampConverter(convertTimestamp((String)param.get("UPDATE_DATE_TIME")));
+    	Timestamp ts = DateTimeUtil.parseTimestamp((String)param.get("UPDATE_DATE_TIME"));
+    	SqlTimestampConverter converter = new SqlTimestampConverter(ts);
 //		converter.setPattern("yyyy-MM-dd HH:mm:ss.SSS");
 		ConvertUtils.register(converter, Timestamp.class);
     	BeanUtils.populate(interview, param);
