@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import hrms.model.Company;
 import hrms.wapi.base.HrmsSimpleDaoService;
 
 /*************************************************************************
@@ -22,7 +21,7 @@ import hrms.wapi.base.HrmsSimpleDaoService;
 public class PersonService extends HrmsSimpleDaoService {
 
 	/**
-     * 人材検索.
+     * 人材一覧検索.
      * @param company
      * @return boolean
      */
@@ -31,16 +30,14 @@ public class PersonService extends HrmsSimpleDaoService {
 		return baseDao.selectList("hrms.company.selectPersonList", param, null);
 	}
 
-    /**
-     * get company info.
-     * @param companyId company Id
-     * @return Company info
+	/**
+     * 人材詳細検索.
+     * @param personId
+     * @return Map<String, Object>
      */
-    public Company getCompany(String companyId) {
-        Company company = new Company();
-        company.setUserId(companyId);
-        company = super.find(company);
-        return company;
-    }
+	@Transactional("hrms.tx")
+	public Map<String, Object> selectPersonDetail(Map<String, String> param) {
+		return baseDao.selectOne("hrms.company.selectPersonList", param, null);
+	}
 
 }

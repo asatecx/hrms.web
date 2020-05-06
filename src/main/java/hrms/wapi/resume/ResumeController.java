@@ -16,6 +16,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,9 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 import af.base.controller.BaseController;
 import af.base.service.PdfReportService;
 import hrms.model.DevPhase;
+import hrms.model.ResumeBase;
 import hrms.model.ResumeProject;
-import hrms.model.Skill;
-import hrms.model.User;
 
 /*************************************************************************
  * Copyright     Asatecx Co.,Ltd.<br/>
@@ -42,10 +42,14 @@ public class ResumeController extends BaseController  {
     @Qualifier("main.pdfReportService")
     protected PdfReportService pdfReportService;
 
+	@Autowired
+    @Qualifier("hrms.resumeService")
+    protected ResumeService resumeService;
+
     @RequestMapping(value = "/resume", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)
-    public void showPdf(HttpServletResponse response) throws IOException {
-        //需要填充的数据
-        Map<String, Object> data = createData();
+    public void showPdf(@RequestBody Map<String, Object> param, HttpServletResponse response) throws IOException {
+        //職歴のデータ
+        Map<String, Object> data = createData(param);
         String dest = pdfReportService.exportToFile(data, "resume.ftl", "simhei.ttf");
         readPdf(response, dest);
     }
@@ -73,89 +77,91 @@ public class ResumeController extends BaseController  {
         }
     }
 
-	private static Map<String,Object> createData(){
-		Map<String,Object> root=new HashMap<String,Object>();
-		User u1 = new User();
-//        u1.setUserId("001");
-//        u1.setValidFlg("1");
-//        u1.setUserName("Aさん");
-        User u2 = new User();
-//        u2.setUserId("002");
-//        u2.setUserName("Bさん");
-//        u2.setValidFlg("2");
-        User u3 = new User();
-//        u3.setUserId("003");
-//        u3.setUserName("Cさん");
-//        u3.setValidFlg("3");
-        List<User> users = new ArrayList<User>();
-        users.add(u1);
-        users.add(u2);
-        users.add(u3);
+	private Map<String,Object> createData(Map<String,Object> param){
+		Map<String,Object> resume = new HashMap<String,Object>();
+		// 個人基本情報
+		ResumeBase resumeBase = new ResumeBase();
+		resumeBase.setNameKj(String.valueOf(param.get("USER_NAME_KANJI")));
+		resumeBase.setNameKn(String.valueOf(param.get("USER_NAME_KANA")));
+		resumeBase.setGender(String.valueOf(param.get("GENDER")));
+		resumeBase.setBirthday(String.valueOf(param.get("BIRTHDAY")));
+		//TODO 年齢算出
+		resumeBase.setAge(String.valueOf(param.get("BIRTHDAY")));
+		resumeBase.setJpLevel(String.valueOf(param.get("JAPANESELEVEL")));
+		resumeBase.setCountry(String.valueOf(param.get("COUNTRY")));
+		resumeBase.setStation(String.valueOf(param.get("STATION")));
+		resumeBase.setEducation(String.valueOf(param.get("EDUCATION")));
+		resumeBase.setMajor(String.valueOf(param.get("MAJOR")));
+		resumeBase.setGraduation(String.valueOf(param.get("GRADUATIONDATE")));
+		resumeBase.setJapanYears(String.valueOf(param.get("JAPAN_EXP")));
+		resumeBase.setWorkYears(String.valueOf(param.get("WORK_EXP")));
 
-        Skill skill1 = new Skill();
-        skill1.setSkill("PHP");
-        skill1.setPeriod("★4年");
-        skill1.setLevel("メンバーに指導ができる");
-
-        Skill skill2 = new Skill();
-        skill2.setSkill("Java");
-        skill2.setPeriod("★2年");
-        skill2.setLevel("業務で即戦力になれる");
-
-        Skill skill3 = new Skill();
-        skill3.setSkill("Javascript");
-        skill3.setPeriod("★1年");
-        skill3.setLevel("業務で即戦力になれる");
-
-        Skill skill4 = new Skill();
-        skill4.setSkill("C");
-        skill4.setPeriod("学生時代に3年");
-        skill4.setLevel("簡単なプログラミングができる");
-
-        Skill skill5 = new Skill();
-        skill5.setSkill("Python");
-        skill5.setPeriod("自宅にて2年");
-        skill5.setLevel("一人でアプリケーション開発ができる");
-
-        List<Skill> programLanguage = new ArrayList<Skill>();
-        programLanguage.add(skill1);
-        programLanguage.add(skill2);
-        programLanguage.add(skill3);
-        programLanguage.add(skill4);
-        programLanguage.add(skill5);
-
-        Skill skill_db1 = new Skill();
-        skill_db1.setSkill("MySQL");
-        skill_db1.setPeriod("★4年");
-        skill_db1.setLevel("構築からチューニングまで対応できる");
-
-        Skill skill_db2 = new Skill();
-        skill_db2.setSkill("Oracle");
-        skill_db2.setPeriod("★2年");
-        skill_db2.setLevel("SQLを使ったプログラミングができる");
-
-        Skill skill_db3 = new Skill();
-        skill_db3.setSkill("PostgresSQL");
-        skill_db3.setPeriod("★1年");
-        skill_db3.setLevel("知識がある");
-
-        List<Skill> skill_db = new ArrayList<Skill>();
-        skill_db.add(skill_db1);
-        skill_db.add(skill_db2);
-        skill_db.add(skill_db3);
-
-        Skill skill_os1 = new Skill();
-        skill_os1.setSkill("Linux");
-        skill_os1.setPeriod("★4年");
-        skill_os1.setLevel("インストールから簡単な設定ができる");
-
-        Skill skill_os2 = new Skill();
-        skill_os2.setSkill("Unix");
-        skill_os2.setPeriod("★2年");
-        skill_os2.setLevel("簡単なコマンドの入力ができる");
-        List<Skill> skill_os = new ArrayList<Skill>();
-        skill_os.add(skill_os1);
-        skill_os.add(skill_os2);
+		Map<String, Object> skillMap = resumeService.selectSkills(param);
+//
+//        Skill skill1 = new Skill();
+//        skill1.setSkill("PHP");
+//        skill1.setPeriod("★4年");
+//        skill1.setLevel("メンバーに指導ができる");
+//
+//        Skill skill2 = new Skill();
+//        skill2.setSkill("Java");
+//        skill2.setPeriod("★2年");
+//        skill2.setLevel("業務で即戦力になれる");
+//
+//        Skill skill3 = new Skill();
+//        skill3.setSkill("Javascript");
+//        skill3.setPeriod("★1年");
+//        skill3.setLevel("業務で即戦力になれる");
+//
+//        Skill skill4 = new Skill();
+//        skill4.setSkill("C");
+//        skill4.setPeriod("学生時代に3年");
+//        skill4.setLevel("簡単なプログラミングができる");
+//
+//        Skill skill5 = new Skill();
+//        skill5.setSkill("Python");
+//        skill5.setPeriod("自宅にて2年");
+//        skill5.setLevel("一人でアプリケーション開発ができる");
+//
+//        List<Skill> programLanguage = new ArrayList<Skill>();
+//        programLanguage.add(skill1);
+//        programLanguage.add(skill2);
+//        programLanguage.add(skill3);
+//        programLanguage.add(skill4);
+//        programLanguage.add(skill5);
+//
+//        Skill skill_db1 = new Skill();
+//        skill_db1.setSkill("MySQL");
+//        skill_db1.setPeriod("★4年");
+//        skill_db1.setLevel("構築からチューニングまで対応できる");
+//
+//        Skill skill_db2 = new Skill();
+//        skill_db2.setSkill("Oracle");
+//        skill_db2.setPeriod("★2年");
+//        skill_db2.setLevel("SQLを使ったプログラミングができる");
+//
+//        Skill skill_db3 = new Skill();
+//        skill_db3.setSkill("PostgresSQL");
+//        skill_db3.setPeriod("★1年");
+//        skill_db3.setLevel("知識がある");
+//
+//        List<Skill> skill_db = new ArrayList<Skill>();
+//        skill_db.add(skill_db1);
+//        skill_db.add(skill_db2);
+//        skill_db.add(skill_db3);
+//
+//        Skill skill_os1 = new Skill();
+//        skill_os1.setSkill("Linux");
+//        skill_os1.setPeriod("★4年");
+//        skill_os1.setLevel("インストールから簡単な設定ができる");
+//
+//        Skill skill_os2 = new Skill();
+//        skill_os2.setSkill("Unix");
+//        skill_os2.setPeriod("★2年");
+//        skill_os2.setLevel("簡単なコマンドの入力ができる");
+//        List<Skill> skill_os = new ArrayList<Skill>();
+//        skill_os.add(skill_os1);
+//        skill_os.add(skill_os2);
 
 
         DevPhase devPhase = new DevPhase();
@@ -196,10 +202,11 @@ public class ResumeController extends BaseController  {
         projects.add(project1);
         projects.add(project2);
 
-        root.put("programLanguage", programLanguage);
-        root.put("skill_db", skill_db);
-        root.put("skill_os", skill_os);
-        root.put("projects", projects);
-		return root;
+        resume.put("resumeBase", resumeBase);
+        resume.put("programLanguage", skillMap.get("lan"));
+        resume.put("skill_db", skillMap.get("db"));
+        resume.put("skill_os", skillMap.get("os"));
+        resume.put("projects", projects);
+		return resume;
 	}
 }

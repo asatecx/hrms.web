@@ -71,13 +71,15 @@
           T_B_PERSON_BASE
       WHERE
           1 = 1
+          <if test="personId != null and personId != ''">
+            AND PERSON_ID = #{personId}
+          </if>
           <if test="contractType != null and contractType.size > 0">
             AND CONTRACT_TYPE IN
           <foreach item="item" index="index" collection="contractType" open="(" separator="," close=")">
             #{item}
           </foreach>
           </if>
-
           <if test="status != null and status.size > 0">
             AND STATUS IN
             <foreach item="item" index="index" collection="status" open="(" separator="," close=")">

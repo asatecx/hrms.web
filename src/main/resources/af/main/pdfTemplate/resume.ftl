@@ -62,23 +62,23 @@
   </td>
   <td rowspan=2　align=center style='width:25%;border:solid black .5pt;
   background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>唐　暁帆<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.nameKj}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=2　valign=center style='width:7%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>男<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.gender}<span><o:p></o:p></span></span></p>
   </td>
   <td align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>1981/4/4<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.birthday}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=2　align=center style='width:12%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>1級<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.jpLevel}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=2　align=center style='width:10%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>中国<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.country}<span><o:p></o:p></span></span></p>
   </td>
   <td align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
@@ -88,11 +88,11 @@
  <tr>
   <td align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>39歳<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.age}<span><o:p></o:p></span></span></p>
   </td>
   <td align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>検見川浜<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.station}<span><o:p></o:p></span></span></p>
   </td>
  </tr>
  <tr>
@@ -121,23 +121,23 @@
  <tr>
   <td colspan=3 align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>中国・遼寧工業大学<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.education}<span><o:p></o:p></span></span></p>
   </td>
   <td colspan=2 align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>計算機科学及び技術<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.major}<span><o:p></o:p></span></span></p>
   </td>
   <td colspan=1 align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>2004/7/1<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.graduation}<span><o:p></o:p></span></span></p>
   </td>
   <td colspan=1 align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>13年<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.workYears}年<span><o:p></o:p></span></span></p>
   </td>
   <td colspan=1 align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>4年<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.japanYears}年<span><o:p></o:p></span></span></p>
   </td>
  </tr>
 </table>

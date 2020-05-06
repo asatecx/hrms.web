@@ -31,9 +31,18 @@ public class PersonController extends BaseController  {
     protected PersonService personService;
 
     @RequestMapping(value = "/person/list", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)
-    public JsonModel regist(@RequestBody Map<String, Object> param) throws Exception {
+    public JsonModel getPersonList(@RequestBody Map<String, Object> param) throws Exception {
     	List<Map<String,Object>> personList = personService.selectPersonList(param);
     	return new JsonModelTable(personList.size(), personList);
+    }
+
+    @RequestMapping(value = "/person/detail", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)
+    public JsonModel getPersonDetail(@RequestBody Map<String, String> param) throws Exception {
+    	Map<String,Object> personDetail = personService.selectPersonDetail(param);
+    	if(personDetail == null) {
+    		return new JsonModelTable(0, personDetail);
+    	}
+    	return new JsonModelTable(1, personDetail);
     }
 
 }
