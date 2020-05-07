@@ -135,9 +135,9 @@ public class LoginController extends BaseController {
         dt.put("res", "OK");
         dt.put("detail", dtDetail);
 
-        return new JsonModel(dt);
+        return new JsonModel(true, "OK", dt);
     }
-    
+
     @CrossOrigin
     @RequestMapping(value = "/main/makeAcount",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
     public String makeAcount(@ModelAttribute  hrms.model.Login loginUser) {
