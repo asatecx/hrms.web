@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import af.base.util.DateUtils;
 import hrms.wapi.base.HrmsSimpleDaoService;
 
 /*************************************************************************
@@ -27,7 +28,12 @@ public class PersonService extends HrmsSimpleDaoService {
      */
 	@Transactional("hrms.tx")
 	public List<Map<String, Object>> selectPersonList(Map<String, Object> param) {
-		return baseDao.selectList("hrms.company.selectPersonList", param, null);
+		List<Map<String, Object>> personList = baseDao.selectList("hrms.company.selectPersonList", param, null);
+		for(Map<String, Object> map : personList) {
+			int age = DateUtils.getAge(String.valueOf(map.get("BIRTHDAY")));
+			map.put("age", age);
+		}
+		return personList;
 	}
 
 	/**

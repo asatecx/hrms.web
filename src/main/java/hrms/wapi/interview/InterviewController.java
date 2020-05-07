@@ -38,8 +38,8 @@ public class InterviewController extends BaseController  {
 
     @RequestMapping(value = "/interview/regist", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)
     public JsonModel regist(@RequestBody Map<String, Object> param) throws Exception {
-
     	Interview interview = new Interview();
+    	ConvertUtils.register(new SqlTimestampConverter(null), Timestamp.class);
     	BeanUtils.populate(interview, param);
     	interview.setBaseInfo(interview.getCompanyId(), null);
     	interview.setInterviewresult("1");
@@ -83,14 +83,14 @@ public class InterviewController extends BaseController  {
 //        return ts;
 //    }
 
-    private Timestamp convertTimestamp(String before) {
-    	Timestamp ts = null;
-        try {
-        	ts = Timestamp.valueOf(before);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return ts;
-    }
+//    private Timestamp convertTimestamp(String before) {
+//    	Timestamp ts = null;
+//        try {
+//        	ts = Timestamp.valueOf(before);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return ts;
+//    }
 
 }
