@@ -8,7 +8,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import hrms.model.Skill;
+import hrms.model.PeopleSkill;
 import hrms.wapi.base.HrmsSimpleDaoService;
 
 /*************************************************************************
@@ -31,15 +31,15 @@ public class ResumeService extends HrmsSimpleDaoService {
 	@Transactional("hrms.tx")
 	public Map<String, Object> selectSkills(Map<String, Object> param) {
 		Map<String, Object> skillMap = new HashMap<String, Object>();
-		List<Skill> langList = new ArrayList<Skill>();
-		List<Skill> dbList = new ArrayList<Skill>();
-		List<Skill> osList = new ArrayList<Skill>();
+		List<PeopleSkill> langList = new ArrayList<PeopleSkill>();
+		List<PeopleSkill> dbList = new ArrayList<PeopleSkill>();
+		List<PeopleSkill> osList = new ArrayList<PeopleSkill>();
 		param.put("personId", param.get("PERSON_ID"));
 		List<Map<String, Object>> skills = baseDao.selectList("hrms.resume.selectSkills", param, null);
 		for(Map<String, Object> map : skills) {
-			Skill skill = new Skill();
+			PeopleSkill skill = new PeopleSkill();
 			skill.setSkill(String.valueOf(map.get("SKILL")));
-			skill.setPeriod(String.valueOf(map.get("EXP")));
+			skill.setExp(String.valueOf(map.get("EXP")));
 			skill.setLevel(getLevelVal(String.valueOf(map.get("LEVEL")), String.valueOf(map.get("SKILLKBN"))));
 			if("LAN".equals(map.get("SKILLKBN"))) {
 				langList.add(skill);
