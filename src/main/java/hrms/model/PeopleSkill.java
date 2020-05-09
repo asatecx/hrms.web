@@ -13,5 +13,4 @@ public class PeopleSkill extends BaseDataModel{
 	private String exp;
 	private int level;
 	private String levelContent;
-
 }

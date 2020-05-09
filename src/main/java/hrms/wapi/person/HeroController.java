@@ -114,7 +114,11 @@ public class HeroController {
 	     */
 	    @CrossOrigin
 	    @RequestMapping(value = "/interviewList", method = RequestMethod.GET)
-	    public List<InterviewResult> search(@RequestParam   String companyName) {
+	    public List<InterviewResult> search(@RequestParam   String casename,
+	    		                            @RequestParam   String  userid,
+	    		                            @RequestParam   int currentPage,
+	    		                            @RequestParam   int pagesize
+	    		) {
 	      List<InterviewResult> interviewResult =new ArrayList<InterviewResult>();
 	      interviewResult.add(new InterviewResult("IBM",
 	    		  "2020-10-20 17:00",
@@ -161,7 +165,7 @@ public class HeroController {
 	    		  "2020-11-01 9:00"
 	    		  ));
 	        List<InterviewResult> resutlts = interviewResult.stream()
-	                .filter(hero -> hero.getCompanyName().toLowerCase().contains(companyName.toLowerCase()))
+	                .filter(hero -> hero.getCompanyName().toLowerCase().contains(casename.toLowerCase()))
 	                .collect(Collectors.toList());
 	        return resutlts;
 	    }
@@ -328,7 +332,7 @@ public class HeroController {
 	    @RequestMapping(value = "/gettanka", method = RequestMethod.GET)
 	    public PeopleBase gettanka(@RequestParam   String userid) {
 	    	PeopleBase user =new PeopleBase();
-	         user.setPERSON_ID(userid);
+	         user.setPerson_id(userid);
 	         PeopleBase result= peopleService.find(user);
 	         return result;
 	    }
@@ -337,19 +341,33 @@ public class HeroController {
 	    @RequestMapping(value = "/getbaseinfo", method = RequestMethod.GET)
 	    public PeopleBase getBaseInfo(@RequestParam   String userid) {
 	    	PeopleBase user =new PeopleBase();
-	         user.setPERSON_ID(userid);
+	         user.setPerson_id(userid);
 	         PeopleBase result= peopleService.find(user);
 	         return result;
 	    }
+
 	    
 	    @CrossOrigin
 	    @RequestMapping(value = "/getskillinfo", method = RequestMethod.GET)
-	    public JsonModel getSkillInfo(@RequestParam   String userid) {
+	    public Skill getSkillInfo(@RequestParam   String userid) {
 	    
 	         Map<String, Object> param = new HashMap<String, Object>();
 	         param.put("PERSON_ID", userid);
-	         List<Map<String, Object>> skillList= peopleService.selectList("hrms.people.selectPeopleSkillList",param,null);
-	         return new JsonModelTable(skillList.size(), skillList);
+	         
+	         param.put("SKILLKBN", "LAN");
+	         List<PeopleSkill> lanList= peopleService.selectList("hrms.people.selectPeopleSkillList",param,null);
+	         param.put("SKILLKBN", "OS");
+	         List<PeopleSkill> osList= peopleService.selectList("hrms.people.selectPeopleSkillList",param,null);
+	         param.put("SKILLKBN", "DB");
+	         List<PeopleSkill> dbList= peopleService.selectList("hrms.people.selectPeopleSkillList",param,null);
+	         Skill skills = new Skill();
+	         
+	         skills.setTableDataLanguage(lanList);
+	         skills.setTableDataDB(dbList);
+	         skills.setTableDataOS(osList);
+	         
+	         return skills;
+	         // return new JsonModelTable(skillList.size(), skillList);
 	    }
 	    
 	    @CrossOrigin

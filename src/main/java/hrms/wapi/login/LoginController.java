@@ -152,9 +152,9 @@ public class LoginController extends BaseController {
     	 PeopleBase mbaseinfo = new PeopleBase();
     	 if("1".equals(userinfo.getUserType())) {
 	    	
-    		 mbaseinfo.setPERSON_ID(userinfo.getUserId());
+    		 mbaseinfo.setPerson_id(userinfo.getUserId());
     		// mbaseinfo.set(userinfo.getUserType());
-    		 mbaseinfo.setMAIL(userinfo.getEmail());
+    		 mbaseinfo.setMail(userinfo.getEmail());
 	    	 boolean peopleResult=peopleService.registPeople(mbaseinfo);
 	    	 
 	    	 if(result&&peopleResult) {
