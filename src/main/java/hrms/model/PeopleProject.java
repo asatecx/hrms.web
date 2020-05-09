@@ -2,6 +2,8 @@ package hrms.model;
 
 
 
+import org.springframework.web.jsf.FacesContextUtils;
+
 import af.base.model.BaseDataModel;
 import af.base.orm.annotation.Table;
 import lombok.Data;
@@ -66,6 +68,7 @@ public class PeopleProject extends BaseDataModel{
 		this.setPhase_ot(face.getPhase_ot())	;
 	}
 	public void readyresponse() {
+		Role role =new Role();
 		role.setRole_tester(this.getRole_tester())	;
 		role.setRole_pg(this.getRole_pg())	;
 		role.setRole_se(this.getRole_se())	;
@@ -77,7 +80,9 @@ public class PeopleProject extends BaseDataModel{
 		role.setRole_am(this.getRole_am())	;
 		role.setRole_arch(this.getRole_arch())	;
 		role.setRole_other(this.getRole_other())	;
+		this.setRole(role);
 		
+		Phase face = new Phase();
 		face.setPhase_rd(this.getPhase_rd())	;
 		face.setPhase_bd(this.getPhase_bd())	;
 		face.setPhase_fd(this.getPhase_fd())	;
@@ -87,6 +92,7 @@ public class PeopleProject extends BaseDataModel{
 		face.setPhase_it(this.getPhase_it())	;
 		face.setPhase_st(this.getPhase_st())	;
 		face.setPhase_ot(this.getPhase_ot())	;
+		this.setFace(face);
 	}
 	
 	
