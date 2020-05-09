@@ -3,7 +3,7 @@
 
 <mapper namespace="hrms.people">
 
-    <select id="selectPeopleSkillList" parameterType="map" resultType="map">
+    <select id="selectPeopleSkillList" parameterType="map" resultType="hrms.model.PeopleSkill">
       SELECT
 		PERSON_ID
 		,SKILLKBN
@@ -16,10 +16,11 @@
           1 = 1
           <if test="PERSON_ID != null">
             AND PERSON_ID= #{PERSON_ID}
+            AND SKILLKBN= #{SKILLKBN}
           </if>
     </select>
     
-  <select id="selectPeopleCarearList" parameterType="map" resultType="hrms.model.ResumeProject">
+  <select id="selectPeopleCarearList" parameterType="map" resultType="hrms.model.PeopleProject">
       SELECT
 		 PERSON_ID
 		,PJ_NAME
@@ -27,6 +28,8 @@
 		,END_YM
 		,BUSSNESS_TYPE
 		,WORK_CONTENTS
+		,WORK_PLACE
+		,LANGUAGE
 		,DEV_ENV
 		,PHASE_RD
 		,PHASE_BD
@@ -50,7 +53,7 @@
 		,ROLE_CONSUL
 		,MEMO
       FROM
-          T_B_PERSON_SKILL
+          T_B_PERSON_PJ
       WHERE
           1 = 1
           <if test="PERSON_ID != null">
