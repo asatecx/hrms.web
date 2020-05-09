@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import hrms.model.Company;
 import hrms.model.Constants;
 import hrms.model.Login;
+import hrms.model.User;
 import hrms.wapi.base.HrmsSimpleDaoService;
 
 /*************************************************************************
@@ -54,15 +55,14 @@ public class LoginService extends HrmsSimpleDaoService {
      * @param Login
      * @return user
      */
-    public String insertLoginUser(Login user) {
-    	
-      
+    public boolean insertLoginUser(Login user) {
+
         int result = baseDao.insert(false, user);
         
         if(result>=1) {
-        	return "OK";
+        	return true;
         }else {
-        	return "NG";
+        	return false;
         }
 
        

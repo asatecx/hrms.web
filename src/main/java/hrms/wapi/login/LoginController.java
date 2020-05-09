@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +21,8 @@ import af.base.model.ClientInformation;
 import af.base.model.JsonModel;
 import af.base.orm.annotation.ClientDetail;
 import af.base.util.InputCheckUtil;
+import hrms.model.PeopleBase;
+import hrms.wapi.person.PeopleService;
 
 /*************************************************************************
  * Copyright     Asatecx Co.,Ltd.<br/>
@@ -36,6 +39,9 @@ public class LoginController extends BaseController {
     @Autowired
 	private LoginService loginService;
 
+	@Autowired
+    @Qualifier("hrms.peopleService")
+    protected PeopleService peopleService;
     /**
      * Search login list.
      * @param map パラメーター
@@ -140,9 +146,37 @@ public class LoginController extends BaseController {
     
     @CrossOrigin
     @RequestMapping(value = "/main/makeAcount",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
-    public String makeAcount(@ModelAttribute  hrms.model.Login loginUser) {
-    	return loginService.insertLoginUser(loginUser);
+    public JsonModel makeAcount(@ModelAttribute  hrms.model.Login userinfo) {
+        Map<String, Object> dtDetail = new HashMap<String, Object>();
+    	 boolean result=loginService.insertLoginUser(userinfo);
+    	 PeopleBase mbaseinfo = new PeopleBase();
+    	 if("1".equals(userinfo.getUserType())) {
+	    	
+    		 mbaseinfo.setPERSON_ID(userinfo.getUserId());
+    		// mbaseinfo.set(userinfo.getUserType());
+    		 mbaseinfo.setMAIL(userinfo.getEmail());
+	    	 boolean peopleResult=peopleService.registPeople(mbaseinfo);
+	    	 
+	    	 if(result&&peopleResult) {
+	    		 dtDetail.put("userId", userinfo.getUserId());
+	    	 }else {
+	    		 return new JsonModel("NG");
+	    	 }
+	    	 
+    	 }else {
+    		 //xiao fan write the logic of company  here please!!!!!!!!!!
+          	dtDetail.put("companyId", userinfo.getUserId());
+          }
 
+         dtDetail.put("userType", userinfo.getUserType());
+         
+         Map<String, Object> dt = new HashMap<String, Object>();
+         dt.put("res", "OK");
+         dt.put("detail", dtDetail);
+
+         return new JsonModel(dt);
+    	 
+    
     }
 
 }

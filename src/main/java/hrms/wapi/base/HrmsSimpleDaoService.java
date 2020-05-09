@@ -145,7 +145,7 @@ public class HrmsSimpleDaoService {
     public int execute(String statementName, Object parameter) {
         return baseDao.execute(statementName, parameter);
     }
-
+    
 
 
 
