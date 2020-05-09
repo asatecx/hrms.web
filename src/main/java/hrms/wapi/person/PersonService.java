@@ -22,6 +22,15 @@ import hrms.wapi.base.HrmsSimpleDaoService;
 public class PersonService extends HrmsSimpleDaoService {
 
 	/**
+     * 人材一覧総件数検索.
+     * @param param
+     * @return int
+     */
+	@Transactional("hrms.tx")
+	public int selectPersonListTotal(Map<String, Object> param) {
+		return baseDao.selectOne("hrms.company.selectPersonListTotal", param, null);
+	}
+	/**
      * 人材一覧検索.
      * @param company
      * @return boolean
@@ -43,7 +52,7 @@ public class PersonService extends HrmsSimpleDaoService {
      */
 	@Transactional("hrms.tx")
 	public Map<String, Object> selectPersonDetail(Map<String, String> param) {
-		return baseDao.selectOne("hrms.company.selectPersonList", param, null);
+		return baseDao.selectOne("hrms.company.selectPersonDetail", param, null);
 	}
 
 }

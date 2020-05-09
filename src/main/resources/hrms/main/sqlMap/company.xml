@@ -31,6 +31,36 @@
           </if>
     </select>
 
+    <select id="selectPersonListTotal" parameterType="map" resultType="java.lang.Integer">
+      SELECT
+        COUNT(1) AS TOTAL
+      FROM
+          T_B_PERSON_BASE
+      WHERE
+          1 = 1
+          <if test="personId != null and personId != ''">
+            AND PERSON_ID = #{personId}
+          </if>
+          <if test="contractType != null and contractType.size > 0">
+            AND CONTRACT_TYPE IN
+          <foreach item="item" index="index" collection="contractType" open="(" separator="," close=")">
+            #{item}
+          </foreach>
+          </if>
+          <if test="status != null and status.size > 0">
+            AND STATUS IN
+            <foreach item="item" index="index" collection="status" open="(" separator="," close=")">
+            #{item}
+          </foreach>
+          </if>
+          <if test="gender != null and gender != '0'.toString()">
+            AND GENDER = #{gender}
+          </if>
+          <if test="country != null and country != '0'.toString()">
+            AND COUNTRY = #{country}
+          </if>
+    </select>
+
     <select id="selectPersonList" parameterType="map" resultType="map">
       SELECT
         PERSON_ID
@@ -94,6 +124,51 @@
           <if test="country != null and country != '0'.toString()">
             AND COUNTRY = #{country}
           </if>
+      LIMIT #{start} , #{limit}
+    </select>
+
+    <select id="selectPersonDetail" parameterType="map" resultType="map">
+      SELECT
+        PERSON_ID
+       ,USER_DISPLAY_NAME
+       ,USER_NAME_KANA
+       ,USER_NAME_KANJI
+       ,USER_NAME_ROMA
+       ,CASE GENDER
+          WHEN '1' THEN '男'
+          WHEN '2' THEN '女'
+          ELSE '其他'
+        END AS GENDER
+       ,BIRTHDAY
+       ,ZIP_CODE
+       ,ADDR_PREF
+       ,ADDR_CITY
+       ,STATION
+       ,PHOTO_ID
+       ,VIDEO_ID
+       ,MAIL
+       ,TEL
+       ,COUNTRY
+       ,EDUCATION
+       ,MAJOR
+       ,WORK_EXP
+       ,JAPAN_EXP
+       ,COMPANY
+       ,CASE CONTRACT_TYPE
+          WHEN '1' THEN '自社'
+          WHEN '2' THEN '協力'
+          WHEN '3' THEN 'フリーランス'
+          ELSE 'その他'
+        END AS CONTRACT_TYPE
+       ,STATUS
+       ,PRICE_MIN
+       ,PRICE_MAX
+       ,JAPANESELEVEL
+       ,GRADUATIONDATE
+      FROM
+          T_B_PERSON_BASE
+      WHERE
+          PERSON_ID = #{personId}
     </select>
 
 </mapper>

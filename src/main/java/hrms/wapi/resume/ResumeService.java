@@ -40,7 +40,7 @@ public class ResumeService extends HrmsSimpleDaoService {
 			PeopleSkill skill = new PeopleSkill();
 			skill.setSkill(String.valueOf(map.get("SKILL")));
 			skill.setExp(String.valueOf(map.get("EXP")));
-			skill.setLevel(getLevelVal(String.valueOf(map.get("LEVEL")), String.valueOf(map.get("SKILLKBN"))));
+			skill.setLevelContent(getLevelVal(String.valueOf(map.get("LEVEL")), String.valueOf(map.get("SKILLKBN"))));
 			if("LAN".equals(map.get("SKILLKBN"))) {
 				langList.add(skill);
 			}else if("DB".equals(map.get("SKILLKBN"))) {

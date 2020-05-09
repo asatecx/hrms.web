@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,10 +31,24 @@ public class PersonController extends BaseController  {
     @Qualifier("hrms.personService")
     protected PersonService personService;
 
-    @RequestMapping(value = "/person/list", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)
-    public JsonModel getPersonList(@RequestBody Map<String, Object> param) throws Exception {
-    	List<Map<String,Object>> personList = personService.selectPersonList(param);
-    	return new JsonModelTable(personList.size(), personList);
+    @RequestMapping(value = "/person/list/{pageNo}/{pagesize}", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)
+    public JsonModel getPersonList(@RequestBody Map<String, Object> param, @PathVariable String pageNo, @PathVariable String pagesize) throws Exception {
+    	int total = personService.selectPersonListTotal(param);
+    	if(total == 0) {
+    		return new JsonModelTable(0, null);
+    	}
+
+    	int start = 0;
+    	int limit = Integer.valueOf(pagesize);
+    	if("1".equals(pageNo)) {
+    		start = 0;
+    	}else{
+    		start = (Integer.valueOf(pageNo)-1)*limit;
+    	}
+    	param.put("start", start);
+    	param.put("limit", limit);
+    	List<Map<String, Object>> personList = personService.selectPersonList(param);
+    	return new JsonModelTable(total, personList);
     }
 
     @RequestMapping(value = "/person/detail", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)

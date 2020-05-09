@@ -185,7 +185,7 @@
   <td valign=top style='width:64.06%;border-top:none;border-left:none;
   border-bottom:solid black .5pt;border-right:solid black .5pt;
   background:white;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.level}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.levelContent}<span><o:p></o:p></span></span></p>
   </td>
  </tr>
  </#list>
@@ -209,7 +209,7 @@
   </td>
   <td valign=top style='width:64.06%;border-top:none;border-left:none;
   background:white;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.level}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.levelContent}<span><o:p></o:p></span></span></p>
   </td>
  </tr>
  </#list>
@@ -234,7 +234,7 @@
   <td valign=top style='width:64.06%;border-top:none;border-left:
   none;border-bottom:solid black .5pt;border-right:solid black .5pt;
   background:white;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.level}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.levelContent}<span><o:p></o:p></span></span></p>
   </td>
  </tr>
  </#list>
