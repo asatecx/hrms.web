@@ -1,32 +1,32 @@
 package hrms.wapi.person;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
-import hrms.model.Acount;
+import af.base.model.JsonModel;
+import af.base.model.JsonModelTable;
+import hrms.model.Carear;
 import hrms.model.City;
 import hrms.model.InterviewResult;
+import hrms.model.PeopleBase;
+import hrms.model.PeopleProject;
+import hrms.model.PeopleSkill;
+import hrms.model.Skill;
 import hrms.model.caseobj;
 
 @RestController
@@ -35,145 +35,77 @@ public class HeroController {
 
 	//private HeroService heroService;
 	public String useridString;
-	/**
-     * hero list
-     */
-   // private  List<Hero> heroes;
-   // @Autowired
-	// public HeroController(HeroService heroService) {
-    public HeroController() {
-   
-	      // this.heroes = this.heroService.findAll();
+	
+	@Autowired
+    @Qualifier("hrms.peopleService")
+    protected PeopleService peopleService;
 
-	    }
-	 
-
-	    
-	    //===============================================================================================
-    
-//    @CrossOrigin
-//    @RequestMapping(value = "/main/login",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ApiResponse loginforVue(@ModelAttribute Acount acount) {
-//    	System.out.println("userId="+acount.getUserId());
-//    	System.out.println("password="+acount.getPassword());
-//    	
-//    	
-//    	  String path = "C:\\Resources\\logindb.txt";
-//          File file = new File(path);
-//
-//          FileOutputStream fileOutputStream;
-//		try {
-//			fileOutputStream = new FileOutputStream(file);
-//	          fileOutputStream.write(acount.getUserId().getBytes());
-//
-//	          fileOutputStream.close();
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			System.out.println(e);
-//		}
-//
-//
-//        //身份验证是否成功
-//        //boolean isSuccess = userService.checkUser(loginName, password);
-//    	boolean isSuccess = true;
-//        if (isSuccess) {
-//           // User user = userService.getUserByLoginName(loginName);
-//            //if (user != null) {
-//                //返回token
-//                //String token = JwtUtil.sign(user.getName(), user.getId());
-//            	  String token = JwtUtil.sign( acount.getUserId());
-//                if (token != null) {
-//                    return ApiResponseUtil.getApiResponse(token);
-//                }
-//           // }
-//        }
-//        //返回登陆失败消息
-//        return ApiResponseUtil.getApiResponse(ApiResponseEnum.LOGIN_FAIL);
-//        
-//    }
-	    @CrossOrigin
-	    @RequestMapping(value = "/makeAcount",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
-	    public void makeAcount(@ModelAttribute  Acount acount) {
-//	        Map<Integer, Hero> heroMap = heroes.streamacount().collect(Collectors.toMap(Hero::getId, Function.identity()));
-//	        Hero hero = heroMap.get(id);
-//	        return hero;
-	    	System.out.println(acount.toString());
-	    	//return heroService.findById(id);
-	    }
-	    
+	
+    public HeroController() { }
 
 	    @CrossOrigin
-	    @RequestMapping(value = "/uploadfile", method = RequestMethod.POST)
-	    public void uploadfile(@RequestParam MultipartFile file  ) {
-	    	System.out.println(file.getOriginalFilename());
-	    	System.out.println(file.getContentType());
-	        // ファイルが空の場合は異常終了
-	        if(file.isEmpty()){
-	            // 異常終了時の処理
-	        }
-	        try {
-	            byte[] bytes = file.getBytes();
-	            BufferedOutputStream uploadFileStream =
-	                    new BufferedOutputStream(new FileOutputStream("C:\\Resources\\"+file.getOriginalFilename()));
-	            uploadFileStream.write(bytes);
-	            uploadFileStream.close();
-	        } catch (Exception e) {
-	            // 異常終了時の処理
-	        } catch (Throwable t) {
-	            // 異常終了時の処理
-	        }
-	    	//return heroService.findById(id);
+	    @RequestMapping(value = "/tanka",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+	    public String modifyTankaAndSchedule(@ModelAttribute  PeopleBase tankainfo) {
+
+	    	int count=peopleService.updateTanka(tankainfo);
+	    	
+	    	if(count>=1) {
+	    		return "OK";
+	    	}else {
+	    		return "NG";
+	    	}
+
 	    }
 	    
-	    
-	    public File multipartToFile(MultipartFile multipart) throws IllegalStateException, IOException 
-	    {
-	           File convFile = new File( multipart.getOriginalFilename());
-	           multipart.transferTo(convFile);
-	           return convFile;
-	    }
 	    @CrossOrigin
-	   // @RequestMapping(value = "/uploadfile",method = RequestMethod.POST)
-	    @RequestMapping(value = "/headphoto", method = RequestMethod.POST)
-	    public void uploadheadphoto(@RequestParam MultipartFile file  ) {
-	    	System.out.println(file.getOriginalFilename());
-	    	System.out.println(file.getContentType());
-	        // ファイルが空の場合は異常終了
-	        if(file.isEmpty()){
-	            // 異常終了時の処理
-	        }
-	        try {
-	        	;
-	            byte[] bytes = file.getBytes();
-	            String path = "C:\\Resources\\logindb.txt";
-	            
-	            FileInputStream fileInputStream = new FileInputStream(path);
+	    @RequestMapping(value = "/baseinfo",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+	    public String modifyBaseInfo(@ModelAttribute  PeopleBase baseinfo) {
 
-	            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
-
-	            String line = null;
-
-	            while ((line = bufferedReader.readLine()) != null) {
-	                System.out.println(line);
-	            
-		            BufferedOutputStream uploadFileStream =
-		                    new BufferedOutputStream(new FileOutputStream("C:\\Resources\\"+line+".jpg"));
-		            File delefile=new File("C:\\Resources\\"+line+".jpg");
-		            delefile.delete();
-		            uploadFileStream.write(bytes);
-		            uploadFileStream.close();
-	            }
-
-	            fileInputStream.close();
-	        } catch (Exception e) {
-	            // 異常終了時の処理
-	        	System.out.println(e);
-	        } catch (Throwable t) {
-	            // 異常終了時の処理
-	        }
-	    	//return heroService.findById(id);
+	    	int count=peopleService.updateBaseInfo(baseinfo);
+	    	
+	    	if(count>=1) {
+	    		return "OK";
+	    	}else {
+	    		return "NG";
+	    	}
 	    }
+	    
+	    @CrossOrigin
+	    @RequestMapping(value = "/skillinfo")
+	    @ResponseBody
+	    public String modifySkillInfo(@RequestBody  Skill skillinfo) {
+	    	PeopleSkill pSkill=new PeopleSkill();
+	    	pSkill.setPerson_id(skillinfo.getTableDataLanguage().get(0).getPerson_id());
+	    	int countdelete=peopleService.deleteSkillInfo(pSkill);
+	    	boolean count=false;
+	    	for (PeopleSkill peopleSkill : skillinfo.getTableDataLanguage()) {
+	    		 count=peopleService.updateskillInfo(peopleSkill);
+			}
+	    	for (PeopleSkill peopleSkill : skillinfo.getTableDataDB()) {
+	    		 count=peopleService.updateskillInfo(peopleSkill);
+			}
+	    	for (PeopleSkill peopleSkill : skillinfo.getTableDataOS()) {
+	    		 count=peopleService.updateskillInfo(peopleSkill);
+			}
+	        return "OK";
+
+	    }
+	    
+	    @CrossOrigin
+	    @RequestMapping(value = "/carearinfo")
+	    @ResponseBody
+	    public String modifyCarearInfo(@RequestBody  Carear carearinfo) {
+	    	PeopleProject pp=new PeopleProject();
+	    	pp.setPerson_id(carearinfo.getCarears().get(0).getPerson_id());
+	    	peopleService.deleteCarearInfo(pp);
+	    	for (PeopleProject carear : carearinfo.getCarears()) {
+	    		carear.readyInsert();
+	    		 peopleService.updateCarearInfo(carear);
+			}
+
+	        return "OK";
+	    }
+	    
 	    /**
 	     * angular tutorial
 	     * reference app/hero-search.service.ts
@@ -305,13 +237,6 @@ public class HeroController {
 	      oss.add("linux");
 	      oss.add("unix");
 
-//	        List<Skill> resutlts = skills.stream()
-//	                .filter(skill -> skill.getSkillcategory().contains(skillcategory))
-//	                .collect(Collectors.toList());
-//	        if(resutlts.size()==0) {
-//	        	return new ArrayList<Skill>();
-//	        }
-	        
 	        Map mmMap=new HashMap<String, List>();
 	        mmMap.put("language", language);
 	        mmMap.put("db", dbs);
@@ -395,12 +320,49 @@ public class HeroController {
 	    		  ,"8要件定義の経験や知見"
 	    		  ,"84月～(長期可能)"
 	    		  ,"8最寄：東京"));
-//	        List<caseobj> resutlts = interviewResult.stream()
-//	                .filter(caseobj -> caseobj.getId()==id)
-//	                .collect(Collectors.toList());
+
 	        return interviewResult;
 	    }
 
-
+	    @CrossOrigin
+	    @RequestMapping(value = "/gettanka", method = RequestMethod.GET)
+	    public PeopleBase gettanka(@RequestParam   String userid) {
+	    	PeopleBase user =new PeopleBase();
+	         user.setPERSON_ID(userid);
+	         PeopleBase result= peopleService.find(user);
+	         return result;
+	    }
+	    
+	    @CrossOrigin
+	    @RequestMapping(value = "/getbaseinfo", method = RequestMethod.GET)
+	    public PeopleBase getBaseInfo(@RequestParam   String userid) {
+	    	PeopleBase user =new PeopleBase();
+	         user.setPERSON_ID(userid);
+	         PeopleBase result= peopleService.find(user);
+	         return result;
+	    }
+	    
+	    @CrossOrigin
+	    @RequestMapping(value = "/getskillinfo", method = RequestMethod.GET)
+	    public JsonModel getSkillInfo(@RequestParam   String userid) {
+	    
+	         Map<String, Object> param = new HashMap<String, Object>();
+	         param.put("PERSON_ID", userid);
+	         List<Map<String, Object>> skillList= peopleService.selectList("hrms.people.selectPeopleSkillList",param,null);
+	         return new JsonModelTable(skillList.size(), skillList);
+	    }
+	    
+	    @CrossOrigin
+	    @RequestMapping(value = "/getcarearinfo", method = RequestMethod.GET)
+	    public List<PeopleProject> getCarearInfo(@RequestParam   String userid) {
+	         Map<String, Object> param = new HashMap<String, Object>();
+	         param.put("PERSON_ID", userid);
+	         List<PeopleProject> carearList= peopleService.selectList("hrms.people.selectPeopleCarearList",param,null);
+	         for (PeopleProject peopleProject : carearList) {
+	        	 peopleProject.readyresponse();
+			}
+	         return carearList;
+	    }
+	    
 
 }

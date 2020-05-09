@@ -93,29 +93,29 @@ public class ResumeController extends BaseController  {
         users.add(u3);
 
         Skill skill1 = new Skill();
-        skill1.setSkill("PHP");
-        skill1.setPeriod("★4年");
-        skill1.setLevel("メンバーに指導ができる");
+//        skill1.setSkill("PHP");
+//        skill1.setPeriod("★4年");
+//        skill1.setLevel("メンバーに指導ができる");
 
         Skill skill2 = new Skill();
-        skill2.setSkill("Java");
-        skill2.setPeriod("★2年");
-        skill2.setLevel("業務で即戦力になれる");
+//        skill2.setSkill("Java");
+//        skill2.setPeriod("★2年");
+//        skill2.setLevel("業務で即戦力になれる");
 
         Skill skill3 = new Skill();
-        skill3.setSkill("Javascript");
-        skill3.setPeriod("★1年");
-        skill3.setLevel("業務で即戦力になれる");
+//        skill3.setSkill("Javascript");
+//        skill3.setPeriod("★1年");
+//        skill3.setLevel("業務で即戦力になれる");
 
-        Skill skill4 = new Skill();
-        skill4.setSkill("C");
-        skill4.setPeriod("学生時代に3年");
-        skill4.setLevel("簡単なプログラミングができる");
+       Skill skill4 = new Skill();
+//        skill4.setSkill("C");
+//        skill4.setPeriod("学生時代に3年");
+//        skill4.setLevel("簡単なプログラミングができる");
 
         Skill skill5 = new Skill();
-        skill5.setSkill("Python");
-        skill5.setPeriod("自宅にて2年");
-        skill5.setLevel("一人でアプリケーション開発ができる");
+//        skill5.setSkill("Python");
+//        skill5.setPeriod("自宅にて2年");
+//        skill5.setLevel("一人でアプリケーション開発ができる");
 
         List<Skill> programLanguage = new ArrayList<Skill>();
         programLanguage.add(skill1);
@@ -125,19 +125,19 @@ public class ResumeController extends BaseController  {
         programLanguage.add(skill5);
 
         Skill skill_db1 = new Skill();
-        skill_db1.setSkill("MySQL");
-        skill_db1.setPeriod("★4年");
-        skill_db1.setLevel("構築からチューニングまで対応できる");
+//        skill_db1.setSkill("MySQL");
+//        skill_db1.setPeriod("★4年");
+//        skill_db1.setLevel("構築からチューニングまで対応できる");
 
         Skill skill_db2 = new Skill();
-        skill_db2.setSkill("Oracle");
-        skill_db2.setPeriod("★2年");
-        skill_db2.setLevel("SQLを使ったプログラミングができる");
+//        skill_db2.setSkill("Oracle");
+//        skill_db2.setPeriod("★2年");
+//        skill_db2.setLevel("SQLを使ったプログラミングができる");
 
         Skill skill_db3 = new Skill();
-        skill_db3.setSkill("PostgresSQL");
-        skill_db3.setPeriod("★1年");
-        skill_db3.setLevel("知識がある");
+//        skill_db3.setSkill("PostgresSQL");
+//        skill_db3.setPeriod("★1年");
+//        skill_db3.setLevel("知識がある");
 
         List<Skill> skill_db = new ArrayList<Skill>();
         skill_db.add(skill_db1);
@@ -145,14 +145,14 @@ public class ResumeController extends BaseController  {
         skill_db.add(skill_db3);
 
         Skill skill_os1 = new Skill();
-        skill_os1.setSkill("Linux");
-        skill_os1.setPeriod("★4年");
-        skill_os1.setLevel("インストールから簡単な設定ができる");
+//        skill_os1.setSkill("Linux");
+//        skill_os1.setPeriod("★4年");
+//        skill_os1.setLevel("インストールから簡単な設定ができる");
 
         Skill skill_os2 = new Skill();
-        skill_os2.setSkill("Unix");
-        skill_os2.setPeriod("★2年");
-        skill_os2.setLevel("簡単なコマンドの入力ができる");
+//        skill_os2.setSkill("Unix");
+//        skill_os2.setPeriod("★2年");
+//        skill_os2.setLevel("簡単なコマンドの入力ができる");
         List<Skill> skill_os = new ArrayList<Skill>();
         skill_os.add(skill_os1);
         skill_os.add(skill_os2);

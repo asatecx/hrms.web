@@ -1,14 +1,17 @@
 package hrms.model;
 
+import java.util.List;
+
+import lombok.Data;
+
 public class Skill {
-	private String skillcategory;
-
-
-	private String skill;
-
-	private String period;
-
-	private String level;
+	
+	/**
+	 * @return the tableDataLanguage
+	 */
+	public List<PeopleSkill> getTableDataLanguage() {
+		return tableDataLanguage;
+	}
 	/**
 	 * 
 	 */
@@ -17,48 +20,39 @@ public class Skill {
 		// TODO Auto-generated constructor stub
 	}
 	/**
-	 * @param skillcategory
-	 * @param skill
+	 * @param tableDataLanguage the tableDataLanguage to set
 	 */
-	public Skill(String skillcategory, String skill) {
-		super();
-		this.skillcategory = skillcategory;
-		this.skill = skill;
-	}
-	public void setSkill(String skill) {
-		this.skill = skill;
-	}
-
-	public String getSkill() {
-		return this.skill;
-	}
-
-	public void setPeriod(String period) {
-		this.period = period;
-	}
-
-	public String getPeriod() {
-		return this.period;
-	}
-
-	public void setLevel(String level) {
-		this.level = level;
-	}
-
-	public String getLevel() {
-		return this.level;
+	public void setTableDataLanguage(List<PeopleSkill> tableDataLanguage) {
+		this.tableDataLanguage = tableDataLanguage;
 	}
 	/**
-	 * @return the skillcategory
+	 * @return the tableDataDB
 	 */
-	public String getSkillcategory() {
-		return skillcategory;
+	public List<PeopleSkill> getTableDataDB() {
+		return tableDataDB;
 	}
 	/**
-	 * @param skillcategory the skillcategory to set
+	 * @param tableDataDB the tableDataDB to set
 	 */
-	public void setSkillcategory(String skillcategory) {
-		this.skillcategory = skillcategory;
+	public void setTableDataDB(List<PeopleSkill> tableDataDB) {
+		this.tableDataDB = tableDataDB;
 	}
+	/**
+	 * @return the tableDataOS
+	 */
+	public List<PeopleSkill> getTableDataOS() {
+		return tableDataOS;
+	}
+	/**
+	 * @param tableDataOS the tableDataOS to set
+	 */
+	public void setTableDataOS(List<PeopleSkill> tableDataOS) {
+		this.tableDataOS = tableDataOS;
+	}
+	private List<PeopleSkill> tableDataLanguage;
+	private List<PeopleSkill> tableDataDB;
+	private List<PeopleSkill> tableDataOS;
+
+
 
 }
