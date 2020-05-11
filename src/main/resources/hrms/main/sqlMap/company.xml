@@ -94,7 +94,12 @@
           WHEN '3' THEN 'フリーランス'
           ELSE 'その他'
         END AS CONTRACT_TYPE
-       ,STATUS
+       ,CASE STATUS
+          WHEN '1' THEN 'すぐ稼働可能です'
+          WHEN '2' THEN '今後稼働が空く予定です'
+          WHEN '3' THEN '案件によります'
+          ELSE 'その他'
+        END AS STATUS
        ,PRICE_MIN
        ,PRICE_MAX
        ,JAPANESELEVEL
@@ -160,7 +165,12 @@
           WHEN '3' THEN 'フリーランス'
           ELSE 'その他'
         END AS CONTRACT_TYPE
-       ,STATUS
+       ,CASE STATUS
+          WHEN '1' THEN 'すぐ稼働可能です'
+          WHEN '2' THEN '今後稼働が空く予定です'
+          WHEN '3' THEN '案件によります'
+          ELSE 'その他'
+        END AS STATUS
        ,PRICE_MIN
        ,PRICE_MAX
        ,JAPANESELEVEL
