@@ -59,4 +59,23 @@ public class InterviewService extends HrmsSimpleDaoService {
 						"UPDATE_DATE_TIME");
 	}
 
+	/**
+     * delete interview info.
+     * @param companyId company Id
+     * @return Company info
+     */
+	@Transactional("hrms.tx")
+	public void deleteInterview(Interview interview) {
+		// 面接情報更新
+		super.updateFree(true, interview,
+				new String[] {
+						"INTERVIEW_RESULT",
+						"UPDATE_USER",
+						"UPDATED_BY",
+						"UPDATE_DATE_TIME" },
+						"PERSON_ID",
+						"COMPANY_ID",
+						"UPDATE_DATE_TIME");
+	}
+
 }

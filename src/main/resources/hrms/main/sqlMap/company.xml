@@ -29,6 +29,18 @@
           <if test="companyId != null">
             AND COMPANY_ID = #{companyId}
           </if>
+          <if test="validFlg != true">
+            AND INTERVIEW_RESULT != '7'
+          </if>
+          <if test="caseName != null and caseName != ''">
+            AND CASE_NAME LIKE concat('%',#{caseName},'%')
+          </if>
+          <if test="from != null and from != ''">
+            AND INTERVIEW_DATE <![CDATA[ >= ]]> #{from}
+          </if>
+          <if test="to != null and to != ''">
+            AND INTERVIEW_DATE <![CDATA[ <= ]]> #{to}
+          </if>
     </select>
 
     <select id="selectPersonListTotal" parameterType="map" resultType="java.lang.Integer">
