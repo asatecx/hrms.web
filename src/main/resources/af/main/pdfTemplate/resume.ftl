@@ -354,7 +354,7 @@
   </td>
   <td rowspan=4 align=left style='width:8%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.0pt'><span style='font-size:10.0pt;'>${project.devLanguage}/${project.devTool}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.0pt'><span style='font-size:10.0pt;'>${project.devLanguage}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=center style='width:3%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
@@ -362,39 +362,39 @@
   </td>
   <td rowspan=4 align=center style='width:1%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p><span style='font-size:8.0pt;'>${project.devPhase.require}<span><o:p></o:p></span></span></p>
+  <p><span style='font-size:8.0pt;'>${project.RD}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=center style='width:1%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p ><span style='font-size:8.0pt;'>${project.devPhase.baseDesign}<span><o:p></o:p></span></span></p>
+  <p ><span style='font-size:8.0pt;'>${project.BD}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=center style='width:1%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p><span style='font-size:8.0pt;'>${project.devPhase.functionDesign}<span><o:p></o:p></span></span></p>
+  <p><span style='font-size:8.0pt;'>${project.FD}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=center style='width:1%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p><span style='font-size:8.0pt;'>${project.devPhase.detailDesign}<span><o:p></o:p></span></span></p>
+  <p><span style='font-size:8.0pt;'>${project.DD}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=center style='width:1%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p><span style='font-size:8.0pt;'>${project.devPhase.coding}<span><o:p></o:p></span></span></p>
+  <p><span style='font-size:8.0pt;'>${project.CD}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=center style='width:1%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p><span style='font-size:8.0pt;'>${project.devPhase.unitTest}<span><o:p></o:p></span></span></p>
+  <p><span style='font-size:8.0pt;'>${project.UT}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=center style='width:1%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p><span style='font-size:8.0pt;'>${project.devPhase.interfaceTest}<span><o:p></o:p></span></span></p>
+  <p><span style='font-size:8.0pt;'>${project.IT}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=center style='width:1%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p><span style='font-size:8.0pt;'>${project.devPhase.systemTest}<span><o:p></o:p></span></span></p>
+  <p><span style='font-size:8.0pt;'>${project.ST}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=center style='width:1%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p><span style='font-size:8.0pt;'>${project.devPhase.maintenance}<span><o:p></o:p></span></span></p>
+  <p><span style='font-size:8.0pt;'>${project.OT}<span><o:p></o:p></span></span></p>
   </td>
  </tr>
  <tr>

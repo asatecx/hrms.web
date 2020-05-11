@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 import af.base.controller.BaseController;
 import af.base.service.PdfReportService;
 import af.base.util.DateUtils;
-import hrms.model.DevPhase;
 import hrms.model.ResumeBase;
 import hrms.model.ResumeProject;
 
@@ -99,43 +97,40 @@ public class ResumeController extends BaseController  {
 
 		Map<String, Object> skillMap = resumeService.selectSkills(param);
 
-        DevPhase devPhase = new DevPhase();
-        devPhase.setBaseDesign("〇");
+        List<ResumeProject> projects = resumeService.selectProjectList(param);
 
-        List<ResumeProject> projects = new ArrayList<ResumeProject>();
-
-        ResumeProject project1 = new ResumeProject();
-        project1.setNo("1");
-        project1.setDevFrom("2015/4/1");
-        project1.setDevTo("2016/3/31");
-        project1.setWorkplace("日本");
-        project1.setProjectName("電力システム開発");
-        project1.setProjectType("エネルギー");
-        project1.setDevLanguage("Java");
-        project1.setDevTool("Eclipse");
-        project1.setOS("Windows");
-        project1.setDB("Oracle");
-        project1.setCharge("SE");
-        project1.setDescription("該当会社生産システムを運用監視、通信システム既存システムに従って、機能追加や強化する作業を行う");
-        project1.setDevPhase(devPhase);
-
-        ResumeProject project2 = new ResumeProject();
-        project2.setNo("2");
-        project2.setDevFrom("2018/5/1");
-        project2.setDevTo("2020/4/30");
-        project2.setWorkplace("日本");
-        project2.setProjectName("データ移行システム");
-        project2.setProjectType("販売");
-        project2.setDevLanguage("Java");
-        project2.setDevTool("Eclipse");
-        project2.setOS("Linux");
-        project2.setDB("MySQL");
-        project2.setCharge("PL");
-        project2.setDescription("DataSpider ツールを利用し、多種類データベースからOracleへのデータ移行作業を実施する詳細設計～結合テストまで担当する");
-        project2.setDevPhase(devPhase);
-
-        projects.add(project1);
-        projects.add(project2);
+//        ResumeProject project1 = new ResumeProject();
+//        project1.setNo("1");
+//        project1.setDevFrom("2015/4/1");
+//        project1.setDevTo("2016/3/31");
+//        project1.setWorkplace("日本");
+//        project1.setProjectName("電力システム開発");
+//        project1.setProjectType("エネルギー");
+//        project1.setDevLanguage("Java");
+//        project1.setDevTool("Eclipse");
+//        project1.setOS("Windows");
+//        project1.setDB("Oracle");
+//        project1.setCharge("SE");
+//        project1.setDescription("該当会社生産システムを運用監視、通信システム既存システムに従って、機能追加や強化する作業を行う");
+//        project1.setDevPhase(devPhase);
+//
+//        ResumeProject project2 = new ResumeProject();
+//        project2.setNo("2");
+//        project2.setDevFrom("2018/5/1");
+//        project2.setDevTo("2020/4/30");
+//        project2.setWorkplace("日本");
+//        project2.setProjectName("データ移行システム");
+//        project2.setProjectType("販売");
+//        project2.setDevLanguage("Java");
+//        project2.setDevTool("Eclipse");
+//        project2.setOS("Linux");
+//        project2.setDB("MySQL");
+//        project2.setCharge("PL");
+//        project2.setDescription("DataSpider ツールを利用し、多種類データベースからOracleへのデータ移行作業を実施する詳細設計～結合テストまで担当する");
+//        project2.setDevPhase(devPhase);
+//
+//        projects.add(project1);
+//        projects.add(project2);
 
         resume.put("resumeBase", resumeBase);
         resume.put("programLanguage", skillMap.get("lan"));

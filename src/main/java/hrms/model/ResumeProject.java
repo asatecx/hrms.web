@@ -1,5 +1,8 @@
 package hrms.model;
 
+import lombok.Data;
+
+@Data
 public class ResumeProject {
 	/**
 	 * 番号
@@ -30,13 +33,17 @@ public class ResumeProject {
 	 */
 	private String description;
 	/**
-	 * OS
-	 */
+    * OS
+    */
 	private String OS;
 	/**
-	 * データベース
-	 */
+	 * DB
+	*/
 	private String DB;
+	/**
+	 * 開発環境
+	 */
+	private String devEnv;
 	/**
 	 * 開発言語
 	 */
@@ -50,112 +57,40 @@ public class ResumeProject {
 	 */
 	private String charge;
 	/**
-	 * 開発フェーズ
+	 * 要件定義
 	 */
-	private DevPhase devPhase;
-
-	public void setNo(String no) {
-		this.no = no;
-	}
-
-	public String getNo() {
-		return this.no;
-	}
-
-	public void setDevFrom(String devFrom) {
-		this.devFrom = devFrom;
-	}
-
-	public String getDevFrom() {
-		return this.devFrom;
-	}
-
-	public void setDevTo(String devTo) {
-		this.devTo = devTo;
-	}
-
-	public String getDevTo() {
-		return this.devTo;
-	}
-
-	public void setWorkplace(String workplace) {
-		this.workplace = workplace;
-	}
-
-	public String getWorkplace() {
-		return this.workplace;
-	}
-
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
-
-	public String getProjectName() {
-		return this.projectName;
-	}
-
-	public void setProjectType(String projectType) {
-		this.projectType = projectType;
-	}
-
-	public String getProjectType() {
-		return this.projectType;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getDescription() {
-		return this.description;
-	}
-
-	public void setOS(String OS) {
-		this.OS = OS;
-	}
-
-	public String getOS() {
-		return this.OS;
-	}
-
-	public void setDB(String DB) {
-		this.DB = DB;
-	}
-
-	public String getDB() {
-		return this.DB;
-	}
-
-	public void setDevLanguage(String devLanguage) {
-		this.devLanguage = devLanguage;
-	}
-
-	public String getDevLanguage() {
-		return this.devLanguage;
-	}
-
-	public void setDevTool(String devTool) {
-		this.devTool = devTool;
-	}
-
-	public String getDevTool() {
-		return this.devTool;
-	}
-
-	public void setCharge(String charge) {
-		this.charge = charge;
-	}
-
-	public String getCharge() {
-		return this.charge;
-	}
-
-	public void setDevPhase(DevPhase devPhase) {
-		this.devPhase = devPhase;
-	}
-
-	public DevPhase getDevPhase() {
-		return this.devPhase;
-	}
+	private String RD;
+	/**
+	 * 基本設計
+	 */
+	private String BD;
+	/**
+	 * 機能設計
+	 */
+	private String FD;
+	/**
+	 * 詳細設計
+	 */
+	private String DD;
+	/**
+	 * 製造
+	 */
+	private String CD;
+	/**
+	 * 単体テスト
+	 */
+	private String UT;
+	/**
+	 * 結合テスト
+	 */
+	private String IT;
+	/**
+	 * 総合テスト
+	 */
+	private String ST;
+	/**
+	 * 運用保守
+	 */
+	private String OT;
 
 }
