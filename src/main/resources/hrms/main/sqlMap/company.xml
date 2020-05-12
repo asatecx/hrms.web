@@ -16,6 +16,18 @@
           ,CONCAT(INTERVIEW_DATE,' ',START_TIME,'～',END_TIME) AS INTERVIEW_DATETIME
           ,WORK_CONTENTS
           ,INTERVIEW_RESULT
+          ,CASE INTERVIEW_RESULT
+             WHEN '1' THEN '招待された'
+             WHEN '2' THEN '面接を受けた'
+             WHEN '3' THEN '面接を断った'
+             WHEN '4' THEN '結果まち'
+             WHEN '5' THEN '合格'
+             WHEN '6' THEN '不合格'
+             WHEN '7' THEN '面接キャンセル'
+             WHEN '8' THEN '面接キャンセル'
+             WHEN '9' THEN '合格を辞退した'
+             ELSE '其他'
+           END AS INTERVIEW_STATUS
           ,CREATE_USER
           ,CREATE_DATE_TIME
           ,UPDATE_USER
