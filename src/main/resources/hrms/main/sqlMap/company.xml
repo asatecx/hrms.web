@@ -5,18 +5,18 @@
 
     <select id="selectInterviewList" parameterType="map" resultType="map">
       SELECT
-          COMPANY_ID
-          ,PERSON_ID
-          ,CASE_NAME
-          ,WORK_PLACE
-          ,INTERVIEW_PLACE
-          ,INTERVIEW_DATE
-          ,START_TIME
-          ,END_TIME
-          ,CONCAT(INTERVIEW_DATE,' ',START_TIME,'～',END_TIME) AS INTERVIEW_DATETIME
-          ,WORK_CONTENTS
-          ,INTERVIEW_RESULT
-          ,CASE INTERVIEW_RESULT
+          A.COMPANY_ID
+          ,A.PERSON_ID
+          ,A.CASE_NAME
+          ,A.WORK_PLACE
+          ,A.INTERVIEW_PLACE
+          ,A.INTERVIEW_DATE
+          ,A.START_TIME
+          ,A.END_TIME
+          ,CONCAT(A.INTERVIEW_DATE,' ',A.START_TIME,'～',A.END_TIME) AS INTERVIEW_DATETIME
+          ,A.WORK_CONTENTS
+          ,A.INTERVIEW_RESULT
+          ,CASE A.INTERVIEW_RESULT
              WHEN '1' THEN '招待された'
              WHEN '2' THEN '面接を受けた'
              WHEN '3' THEN '面接を断った'
@@ -28,30 +28,32 @@
              WHEN '9' THEN '合格を辞退した'
              ELSE '其他'
            END AS INTERVIEW_STATUS
-          ,CREATE_USER
-          ,CREATE_DATE_TIME
-          ,UPDATE_USER
-          ,UPDATE_DATE_TIME
-          ,CREATED_BY
-          ,UPDATED_BY
+          ,A.CREATE_USER
+          ,A.CREATE_DATE_TIME
+          ,A.UPDATE_USER
+          ,A.UPDATE_DATE_TIME
+          ,A.CREATED_BY
+          ,A.UPDATED_BY
+          ,B.USER_NAME_KANJI
       FROM
-          T_B_INTERVIEW
+          T_B_INTERVIEW A INNER JOIN T_B_PERSON_BASE B ON
+          A.PERSON_ID = B.PERSON_ID
       WHERE
           1 = 1
           <if test="companyId != null">
-            AND COMPANY_ID = #{companyId}
+            AND A.COMPANY_ID = #{companyId}
           </if>
           <if test="validFlg != true">
-            AND INTERVIEW_RESULT != '7'
+            AND A.INTERVIEW_RESULT != '7'
           </if>
           <if test="caseName != null and caseName != ''">
-            AND CASE_NAME LIKE concat('%',#{caseName},'%')
+            AND A.CASE_NAME LIKE concat('%',#{caseName},'%')
           </if>
           <if test="from != null and from != ''">
-            AND INTERVIEW_DATE <![CDATA[ >= ]]> #{from}
+            AND A.INTERVIEW_DATE <![CDATA[ >= ]]> #{from}
           </if>
           <if test="to != null and to != ''">
-            AND INTERVIEW_DATE <![CDATA[ <= ]]> #{to}
+            AND A.INTERVIEW_DATE <![CDATA[ <= ]]> #{to}
           </if>
     </select>
 
