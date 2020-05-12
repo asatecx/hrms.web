@@ -70,6 +70,18 @@ public class InterviewController extends BaseController  {
         return new JsonModel(true, "面談予約更新しました。");
     }
 
+    @RequestMapping(value = "/interview/updateResult", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)
+    public JsonModel updateResult(@RequestBody Map<String, Object> param) throws Exception {
+    	Interview interview = new Interview();
+    	Timestamp ts = DateTimeUtil.parseTimestamp((String)param.get("UPDATE_DATE_TIME"));
+    	SqlTimestampConverter converter = new SqlTimestampConverter(ts);
+    	ConvertUtils.register(converter, Timestamp.class);
+    	BeanUtils.populate(interview, param);
+    	interview.setBaseInfo(interview.getCompanyId(), null);
+    	interviewService.deleteInterview(interview);
+        return new JsonModel(true, "面談キャンセルしました。");
+    }
+
     @RequestMapping(value = "/interview/delete", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)
     public JsonModel detele(@RequestBody Map<String, Object> param) throws Exception {
     	Interview interview = new Interview();
@@ -79,7 +91,7 @@ public class InterviewController extends BaseController  {
     	BeanUtils.populate(interview, param);
     	interview.setBaseInfo(interview.getCompanyId(), null);
     	interviewService.deleteInterview(interview);
-        return new JsonModel(true, "面談キャンセルしました。");
+        return new JsonModel(true, "面談結果を更新しました。");
     }
 
 //    private Timestamp convertTimestamp(String before) {
