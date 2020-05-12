@@ -79,7 +79,7 @@ public class InterviewController extends BaseController  {
     	BeanUtils.populate(interview, param);
     	interview.setBaseInfo(interview.getCompanyId(), null);
     	interviewService.deleteInterview(interview);
-        return new JsonModel(true, "面談キャンセルしました。");
+        return new JsonModel(true, "面談結果を更新しました。");
     }
 
     @RequestMapping(value = "/interview/delete", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)
@@ -91,7 +91,7 @@ public class InterviewController extends BaseController  {
     	BeanUtils.populate(interview, param);
     	interview.setBaseInfo(interview.getCompanyId(), null);
     	interviewService.deleteInterview(interview);
-        return new JsonModel(true, "面談結果を更新しました。");
+        return new JsonModel(true, "面談キャンセルしました。");
     }
 
 //    private Timestamp convertTimestamp(String before) {
