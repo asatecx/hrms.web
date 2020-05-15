@@ -13,14 +13,23 @@ public class User extends BaseDataModel {
      *ユーザーID
      */
     private String userId;
-    /**
-     * ユーザ名
-     */
-    private String userName;
+    private String name;
+    private String namekana;
     /**
      * パスワード
      */
     private String password;
+    
+    private String userType;
+    
+    private String tanka;
+    private String schedualstart;
+    private String schedualend;
+    /**
+     * メール
+     */
+    private String mail;
+
 
     private String validFlg;
 

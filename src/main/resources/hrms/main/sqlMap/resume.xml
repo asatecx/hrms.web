@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hrms.resume">
+
+    <select id="selectSkills" parameterType="map" resultType="map">
+      SELECT
+          PERSON_ID
+          ,SKILLKBN
+          ,SKILL
+          ,EXP
+          ,LEVEL
+      FROM
+          T_B_PERSON_SKILL
+      WHERE
+          1 = 1
+          <if test="personId != null and personId != ''">
+            AND PERSON_ID = #{personId}
+          </if>
+    </select>
+
+    <select id="selectProjectList" parameterType="map" resultType="map">
+      SELECT
+           PERSON_ID
+          ,PJ_NAME
+          ,START_YM
+          ,END_YM
+          ,BUSSNESS_TYPE
+          ,WORK_CONTENTS
+          ,DEV_ENV
+          ,CASE PHASE_RD WHEN '1' THEN '〇' ELSE '' END AS PHASE_RD
+          ,CASE PHASE_BD WHEN '1' THEN '〇' ELSE '' END AS PHASE_BD
+          ,CASE PHASE_FD WHEN '1' THEN '〇' ELSE '' END AS PHASE_FD
+          ,CASE PHASE_DD WHEN '1' THEN '〇' ELSE '' END AS PHASE_DD
+          ,CASE PHASE_CD WHEN '1' THEN '〇' ELSE '' END AS PHASE_CD
+          ,CASE PHASE_UT WHEN '1' THEN '〇' ELSE '' END AS PHASE_UT
+          ,CASE PHASE_IT WHEN '1' THEN '〇' ELSE '' END AS PHASE_IT
+          ,CASE PHASE_ST WHEN '1' THEN '〇' ELSE '' END AS PHASE_ST
+          ,CASE PHASE_OT WHEN '1' THEN '〇' ELSE '' END AS PHASE_OT
+          ,ROLE_TESTER
+          ,ROLE_PG
+          ,ROLE_SE
+          ,ROLE_BSE
+          ,ROLE_SL
+          ,ROLE_TL
+          ,ROLE_PM
+          ,ROLE_PMO
+          ,ROLE_AM
+          ,ROLE_ARCH
+          ,ROLE_OTHER
+          ,ROLE_CONSUL
+          ,OTHER
+          ,MEMO
+          ,WORK_PLACE
+      FROM
+          T_B_PERSON_PJ
+      WHERE
+          1 = 1
+          <if test="personId != null and personId != ''">
+            AND PERSON_ID = #{personId}
+          </if>
+    </select>
+</mapper>

@@ -3,17 +3,14 @@ package hrms.wapi.interview;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import af.main.model.User;
-import hrms.model.Company;
-import hrms.model.Constants;
 import hrms.model.Interview;
 import hrms.wapi.base.HrmsSimpleDaoService;
 
 /*************************************************************************
  * Copyright     Asatecx Co.,Ltd.<br/>
- * Package       af.main.wapi.company<br/>
+ * Package       hrms.wapi.interview<br/>
  * Class         InterviewService<br/>
- * Summary       会社サービス<br/>
+ * Summary       面接サービス<br/>
  * <br/>
  * Date             Author      Category     Version     Note<br/>
  * 2020/04/25       tang-xf     Add          1.0.0       新規作成<br/>
@@ -22,7 +19,7 @@ import hrms.wapi.base.HrmsSimpleDaoService;
 public class InterviewService extends HrmsSimpleDaoService {
 
 	/**
-     * 会社情報登録.
+     * 面接情報登録.
      * @param company
      * @return boolean
      */
@@ -35,35 +32,50 @@ public class InterviewService extends HrmsSimpleDaoService {
 		super.insert(true, interview);
 		return true;
 	}
-    /**
-     * Select user without password.
-     * @param userId
-     * @return user
-     */
-    public User getUser(String userId) {
-        User user = new User();
-        user.setUSER_ID(userId);
-        user = super.find(user);
-        if (user != null) {
-            if (!Constants.VALID_FLG_TRUE.equals(user.getVALID_FLG())) {
-                user = null;
-            } else {
-                // TODO Somethig
-            }
-        }
-        return user;
-    }
 
     /**
-     * get company info.
+     * update interview info.
      * @param companyId company Id
      * @return Company info
      */
-    public Company getCompany(String companyId) {
-        Company company = new Company();
-        company.setUserId(companyId);
-        company = super.find(company);
-        return company;
-    }
+	@Transactional("hrms.tx")
+	public void updateInterview(Interview interview) {
+		// 面接情報更新
+		super.updateFree(true, interview,
+				new String[] {
+						"CASE_NAME",
+						"WORK_PLACE",
+						"INTERVIEW_PLACE",
+						"INTERVIEW_DATE",
+						"START_TIME",
+						"END_TIME",
+						"WORK_CONTENTS",
+						"INTERVIEW_RESULT",
+						"UPDATE_USER",
+						"UPDATED_BY",
+						"UPDATE_DATE_TIME" },
+						"PERSON_ID",
+						"COMPANY_ID",
+						"UPDATE_DATE_TIME");
+	}
+
+	/**
+     * delete interview info.
+     * @param companyId company Id
+     * @return Company info
+     */
+	@Transactional("hrms.tx")
+	public void deleteInterview(Interview interview) {
+		// 面接情報更新
+		super.updateFree(true, interview,
+				new String[] {
+						"INTERVIEW_RESULT",
+						"UPDATE_USER",
+						"UPDATED_BY",
+						"UPDATE_DATE_TIME" },
+						"PERSON_ID",
+						"COMPANY_ID",
+						"UPDATE_DATE_TIME");
+	}
 
 }

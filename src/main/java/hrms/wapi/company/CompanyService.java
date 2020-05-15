@@ -11,7 +11,7 @@ import hrms.wapi.base.HrmsSimpleDaoService;
 
 /*************************************************************************
  * Copyright     Asatecx Co.,Ltd.<br/>
- * Package       pf.main.wapi.company<br/>
+ * Package       af.main.wapi.company<br/>
  * Class         CompanyService<br/>
  * Summary       会社サービス<br/>
  * <br/>

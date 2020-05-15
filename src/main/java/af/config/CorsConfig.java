@@ -20,8 +20,12 @@ public class CorsConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/videos/**")
 //                .addResourceLocations("classpath:/static/")
 //                .addResourceLocations("classpath:/public/")
-                .addResourceLocations("file:/home/hrms/videos/");
+                //.addResourceLocations("file:/home/hrms/videos/");
+                .addResourceLocations("file:/C:/Resources/videos/");
 //        		.addResourceLocations("file:/C:/E/yule/Adt/");
+        
+        registry.addResourceHandler("/photos/**")
+                .addResourceLocations("file:/C:/Resources/photos/");
     }
 //    @Bean
 //    public CorsFilter corsFilter() {

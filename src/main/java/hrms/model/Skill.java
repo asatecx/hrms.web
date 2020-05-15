@@ -1,35 +1,58 @@
 package hrms.model;
 
+import java.util.List;
+
+import lombok.Data;
+
 public class Skill {
-
-	private String skill;
-
-	private String period;
-
-	private String level;
-
-	public void setSkill(String skill) {
-		this.skill = skill;
+	
+	/**
+	 * @return the tableDataLanguage
+	 */
+	public List<PeopleSkill> getTableDataLanguage() {
+		return tableDataLanguage;
 	}
-
-	public String getSkill() {
-		return this.skill;
+	/**
+	 * 
+	 */
+	public Skill() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
-
-	public void setPeriod(String period) {
-		this.period = period;
+	/**
+	 * @param tableDataLanguage the tableDataLanguage to set
+	 */
+	public void setTableDataLanguage(List<PeopleSkill> tableDataLanguage) {
+		this.tableDataLanguage = tableDataLanguage;
 	}
-
-	public String getPeriod() {
-		return this.period;
+	/**
+	 * @return the tableDataDB
+	 */
+	public List<PeopleSkill> getTableDataDB() {
+		return tableDataDB;
 	}
-
-	public void setLevel(String level) {
-		this.level = level;
+	/**
+	 * @param tableDataDB the tableDataDB to set
+	 */
+	public void setTableDataDB(List<PeopleSkill> tableDataDB) {
+		this.tableDataDB = tableDataDB;
 	}
-
-	public String getLevel() {
-		return this.level;
+	/**
+	 * @return the tableDataOS
+	 */
+	public List<PeopleSkill> getTableDataOS() {
+		return tableDataOS;
 	}
+	/**
+	 * @param tableDataOS the tableDataOS to set
+	 */
+	public void setTableDataOS(List<PeopleSkill> tableDataOS) {
+		this.tableDataOS = tableDataOS;
+	}
+	private List<PeopleSkill> tableDataLanguage;
+	private List<PeopleSkill> tableDataDB;
+	private List<PeopleSkill> tableDataOS;
+
+
 
 }

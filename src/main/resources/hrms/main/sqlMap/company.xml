@@ -1,21 +1,210 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="T_XXXXX">
+<mapper namespace="hrms.company">
 
-    <select id="selectUserList" parameterType="map" resultType="user">
+    <select id="selectInterviewList" parameterType="map" resultType="map">
       SELECT
-          *
+          A.COMPANY_ID
+          ,A.PERSON_ID
+          ,A.CASE_NAME
+          ,A.WORK_PLACE
+          ,A.INTERVIEW_PLACE
+          ,A.INTERVIEW_DATE
+          ,A.START_TIME
+          ,A.END_TIME
+          ,CONCAT(A.INTERVIEW_DATE,' ',A.START_TIME,'～',A.END_TIME) AS INTERVIEW_DATETIME
+          ,A.WORK_CONTENTS
+          ,A.INTERVIEW_RESULT
+          ,CASE A.INTERVIEW_RESULT
+             WHEN '1' THEN '招待された'
+             WHEN '2' THEN '面接を受けた'
+             WHEN '3' THEN '面接を断った'
+             WHEN '4' THEN '結果まち'
+             WHEN '5' THEN '合格'
+             WHEN '6' THEN '不合格'
+             WHEN '7' THEN '面接キャンセル'
+             WHEN '8' THEN '面接キャンセル'
+             WHEN '9' THEN '合格を辞退した'
+             ELSE '其他'
+           END AS INTERVIEW_STATUS
+          ,A.CREATE_USER
+          ,A.CREATE_DATE_TIME
+          ,A.UPDATE_USER
+          ,A.UPDATE_DATE_TIME
+          ,A.CREATED_BY
+          ,A.UPDATED_BY
+          ,B.USER_NAME_KANJI
       FROM
-          T_XXX
+          T_B_INTERVIEW A INNER JOIN T_B_PERSON_BASE B ON
+          A.PERSON_ID = B.PERSON_ID
       WHERE
           1 = 1
-          <if test="B != null">
-            AND B= #{B}
+          <if test="companyId != null">
+            AND A.COMPANY_ID = #{companyId}
           </if>
-          <if test="C == null">
-            AND C = #{C}
+          <if test="validFlg != true">
+            AND A.INTERVIEW_RESULT != '7'
           </if>
+          <if test="caseName != null and caseName != ''">
+            AND A.CASE_NAME LIKE concat('%',#{caseName},'%')
+          </if>
+          <if test="from != null and from != ''">
+            AND A.INTERVIEW_DATE <![CDATA[ >= ]]> #{from}
+          </if>
+          <if test="to != null and to != ''">
+            AND A.INTERVIEW_DATE <![CDATA[ <= ]]> #{to}
+          </if>
+    </select>
+
+    <select id="selectPersonListTotal" parameterType="map" resultType="java.lang.Integer">
+      SELECT
+        COUNT(1) AS TOTAL
+      FROM
+          T_B_PERSON_BASE
+      WHERE
+          1 = 1
+          <if test="personId != null and personId != ''">
+            AND PERSON_ID = #{personId}
+          </if>
+          <if test="contractType != null and contractType.size > 0">
+            AND CONTRACT_TYPE IN
+          <foreach item="item" index="index" collection="contractType" open="(" separator="," close=")">
+            #{item}
+          </foreach>
+          </if>
+          <if test="status != null and status.size > 0">
+            AND STATUS IN
+            <foreach item="item" index="index" collection="status" open="(" separator="," close=")">
+            #{item}
+          </foreach>
+          </if>
+          <if test="gender != null and gender != '0'.toString()">
+            AND GENDER = #{gender}
+          </if>
+          <if test="country != null and country != '0'.toString()">
+            AND COUNTRY = #{country}
+          </if>
+    </select>
+
+    <select id="selectPersonList" parameterType="map" resultType="map">
+      SELECT
+        PERSON_ID
+       ,USER_DISPLAY_NAME
+       ,USER_NAME_KANA
+       ,USER_NAME_KANJI
+       ,USER_NAME_ROMA
+       ,CASE GENDER
+          WHEN '1' THEN '男'
+          WHEN '2' THEN '女'
+          ELSE '其他'
+        END AS GENDER
+       ,BIRTHDAY
+       ,ZIP_CODE
+       ,ADDR_PREF
+       ,ADDR_CITY
+       ,STATION
+       ,PHOTO_ID
+       ,VIDEO_ID
+       ,MAIL
+       ,TEL
+       ,COUNTRY
+       ,EDUCATION
+       ,MAJOR
+       ,WORK_EXP
+       ,JAPAN_EXP
+       ,COMPANY
+       ,CASE CONTRACT_TYPE
+          WHEN '1' THEN '自社'
+          WHEN '2' THEN '協力'
+          WHEN '3' THEN 'フリーランス'
+          ELSE 'その他'
+        END AS CONTRACT_TYPE
+       ,CASE STATUS
+          WHEN '1' THEN 'すぐ稼働可能です'
+          WHEN '2' THEN '今後稼働が空く予定です'
+          WHEN '3' THEN '案件によります'
+          ELSE 'その他'
+        END AS STATUS
+       ,PRICE_MIN
+       ,PRICE_MAX
+       ,JAPANESELEVEL
+       ,GRADUATIONDATE
+      FROM
+          T_B_PERSON_BASE
+      WHERE
+          1 = 1
+          <if test="personId != null and personId != ''">
+            AND PERSON_ID = #{personId}
+          </if>
+          <if test="contractType != null and contractType.size > 0">
+            AND CONTRACT_TYPE IN
+          <foreach item="item" index="index" collection="contractType" open="(" separator="," close=")">
+            #{item}
+          </foreach>
+          </if>
+          <if test="status != null and status.size > 0">
+            AND STATUS IN
+            <foreach item="item" index="index" collection="status" open="(" separator="," close=")">
+            #{item}
+          </foreach>
+          </if>
+          <if test="gender != null and gender != '0'.toString()">
+            AND GENDER = #{gender}
+          </if>
+          <if test="country != null and country != '0'.toString()">
+            AND COUNTRY = #{country}
+          </if>
+      LIMIT #{start} , #{limit}
+    </select>
+
+    <select id="selectPersonDetail" parameterType="map" resultType="map">
+      SELECT
+        PERSON_ID
+       ,USER_DISPLAY_NAME
+       ,USER_NAME_KANA
+       ,USER_NAME_KANJI
+       ,USER_NAME_ROMA
+       ,CASE GENDER
+          WHEN '1' THEN '男'
+          WHEN '2' THEN '女'
+          ELSE '其他'
+        END AS GENDER
+       ,BIRTHDAY
+       ,ZIP_CODE
+       ,ADDR_PREF
+       ,ADDR_CITY
+       ,STATION
+       ,PHOTO_ID
+       ,VIDEO_ID
+       ,MAIL
+       ,TEL
+       ,COUNTRY
+       ,EDUCATION
+       ,MAJOR
+       ,WORK_EXP
+       ,JAPAN_EXP
+       ,COMPANY
+       ,CASE CONTRACT_TYPE
+          WHEN '1' THEN '自社'
+          WHEN '2' THEN '協力'
+          WHEN '3' THEN 'フリーランス'
+          ELSE 'その他'
+        END AS CONTRACT_TYPE
+       ,CASE STATUS
+          WHEN '1' THEN 'すぐ稼働可能です'
+          WHEN '2' THEN '今後稼働が空く予定です'
+          WHEN '3' THEN '案件によります'
+          ELSE 'その他'
+        END AS STATUS
+       ,PRICE_MIN
+       ,PRICE_MAX
+       ,JAPANESELEVEL
+       ,GRADUATIONDATE
+      FROM
+          T_B_PERSON_BASE
+      WHERE
+          PERSON_ID = #{personId}
     </select>
 
 </mapper>
