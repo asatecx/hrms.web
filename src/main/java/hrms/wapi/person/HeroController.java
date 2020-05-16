@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import af.base.model.JsonModel;
-import af.base.model.JsonModelTable;
 import hrms.model.Carear;
 import hrms.model.City;
-import hrms.model.InterviewResult;
+import hrms.model.Interview;
+import hrms.model.Interviews;
 import hrms.model.PeopleBase;
 import hrms.model.PeopleProject;
 import hrms.model.PeopleSkill;
@@ -114,61 +114,73 @@ public class HeroController {
 	     */
 	    @CrossOrigin
 	    @RequestMapping(value = "/interviewList", method = RequestMethod.GET)
-	    public List<InterviewResult> search(@RequestParam   String casename,
+	    public List<Interview> getInterviewList(@RequestParam   String casename,
 	    		                            @RequestParam   String  userid,
 	    		                            @RequestParam   int currentPage,
 	    		                            @RequestParam   int pagesize
 	    		) {
-	      List<InterviewResult> interviewResult =new ArrayList<InterviewResult>();
-	      interviewResult.add(new InterviewResult("IBM",
-	    		  "2020-10-20 17:00",
-	    		  "please wear your suits",
-	    		  "yokohama",
-	    		  "yokohama Station",
-	    		  "ok",
-	    		  "you are very good",
-	    		  "take your notebook",
-	    		  "shinagawa",
-	    		  "2020-11-01 9:00"
-	    		  ));
-	      interviewResult.add(new InterviewResult("SONY",
-	    		  "2020-10-21 17:00",
-	    		  "please wear your suits",
-	    		  "tokyo",
-	    		  "tokyo Station",
-	    		  "ok",
-	    		  "you are very good",
-	    		  "take your notebook",
-	    		  "tokyo",
-	    		  "2020-11-01 9:00"
-	    		  ));
-	      interviewResult.add(new InterviewResult("NEC",
-	    		  "2020-10-20 17:00",
-	    		  "please wear your suits",
-	    		  "tamachi",
-	    		  "tamachi Station",
-	    		  "ok",
-	    		  "you are very good",
-	    		  "take your notebook",
-	    		  "tamachi",
-	    		  "2020-11-01 9:00"
-	    		  ));
-	      interviewResult.add(new InterviewResult("NEC",
-	    		  "2020-10-20 17:00",
-	    		  "please wear your shirt",
-	    		  "mukaigawara",
-	    		  "mukaigawara Station",
-	    		  "ok",
-	    		  "you are very good",
-	    		  "take your notebook",
-	    		  "tamachi",
-	    		  "2020-11-01 9:00"
-	    		  ));
-	        List<InterviewResult> resutlts = interviewResult.stream()
-	                .filter(hero -> hero.getCompanyName().toLowerCase().contains(casename.toLowerCase()))
-	                .collect(Collectors.toList());
-	        return resutlts;
+	     
+	         Map<String, Object> param = new HashMap<String, Object>();
+	         param.put("personId", userid);
+	         param.put("mylimit", pagesize);
+	         param.put("myoffset", pagesize*(currentPage-1));
+	         List<Interview> interviewList= peopleService.selectList("hrms.people.selectInterviewList",param,null);
+
+	         return interviewList;
 	    }
+	    
+	    @CrossOrigin
+	    @RequestMapping(value = "/deleteInterview", method = RequestMethod.GET)
+	    public int deleteInterview(@RequestParam   String interviewId,
+	    		                            @RequestParam   String  userid
+	    		                    
+	    		) {
+	     
+	    	Interview interview =new Interview();
+	    	
+	    	interview.setInterviewId(interviewId);
+	    	interview.setPersonId(userid);
+	         int number= peopleService.deleteFree(false, interview, new String[]{"INTERVIEW_ID","PERSON_ID"});
+
+	         return number;
+	    }
+	    
+	    
+
+	    @CrossOrigin
+	    @RequestMapping(value = "/deleteInterviews")
+	    @ResponseBody
+	    public int[] deleteInterviews(@RequestBody   Interviews interviews
+	    		
+	    		                    
+	    		) {
+	     
+	         int[] number= peopleService.deleteFree(false, interviews.getInterviews(), new String[]{"INTERVIEW_ID","PERSON_ID"});
+
+	         return number;
+	    }
+	    /**
+	     * angular tutorial
+	     * reference app/hero-search.service.ts
+	     * @param name
+	     * @return selected heroes
+	     */
+	    @CrossOrigin
+	    @RequestMapping(value = "/interviewNumber", method = RequestMethod.GET)
+	    public JsonModel getInterviewNumber(@RequestParam   String casename,
+	    		                            @RequestParam   String  userid
+	    		                      
+	    		) {
+	     
+	         Map<String, Object> param = new HashMap<String, Object>();
+	         param.put("personId", userid);
+	
+	       Map<String, Object> number= peopleService.selectOne("hrms.people.selectInterviewNum",param,null);
+
+	       return new JsonModel( number);
+	    }
+	    
+
 	    
 	    /**
 	     * angular tutorial
