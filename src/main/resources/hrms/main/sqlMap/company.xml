@@ -130,6 +130,7 @@
        ,PRICE_MAX
        ,JAPANESELEVEL
        ,GRADUATIONDATE
+       ,DATE_FORMAT(UPDATE_DATE_TIME, '%Y/%m/%d') AS UPDATE_DATE_TIME
       FROM
           T_B_PERSON_BASE
       WHERE
@@ -155,6 +156,8 @@
           <if test="country != null and country != '0'.toString()">
             AND COUNTRY = #{country}
           </if>
+      ORDER BY
+      	UPDATE_DATE_TIME DESC
       LIMIT #{start} , #{limit}
     </select>
 
@@ -201,6 +204,7 @@
        ,PRICE_MAX
        ,JAPANESELEVEL
        ,GRADUATIONDATE
+       ,DATE_FORMAT(UPDATE_DATE_TIME, '%Y/%m/%d') AS UPDATE_DATE_TIME
       FROM
           T_B_PERSON_BASE
       WHERE
