@@ -24,7 +24,7 @@ public class CorsConfig implements WebMvcConfigurer {
 //                .addResourceLocations("file:/C:/Resources/videos/");
 
         registry.addResourceHandler("/photos/**")
-                .addResourceLocations("file:/home/hrms/videos/");
+                .addResourceLocations("file:/home/hrms/photos/");
     }
 //    @Bean
 //    public CorsFilter corsFilter() {
