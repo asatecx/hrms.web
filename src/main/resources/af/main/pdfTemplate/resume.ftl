@@ -32,7 +32,7 @@
   </td>
   <td align=center style='width:25%;border:solid black .5pt;
   background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>トウ　ギョウホ<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.user_name_kana}<span><o:p></o:p></span></span></p>
   </td>
   <td align=center style='width:7%;border:solid black .5pt;
   border-left:none;background:#CCCCCC;padding:0mm 0mm 0mm 0mm'>
@@ -62,7 +62,7 @@
   </td>
   <td rowspan=2　align=center style='width:25%;border:solid black .5pt;
   background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.nameKj}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.user_name_kanji}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=2　valign=center style='width:7%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
@@ -74,7 +74,7 @@
   </td>
   <td rowspan=2　align=center style='width:12%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.jpLevel}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.japaneselevel}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=2　align=center style='width:10%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
@@ -129,15 +129,15 @@
   </td>
   <td colspan=1 align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.graduation}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.graduationdate}<span><o:p></o:p></span></span></p>
   </td>
   <td colspan=1 align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.workYears}年<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.work_exp}年<span><o:p></o:p></span></span></p>
   </td>
   <td colspan=1 align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.japanYears}年<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.japan_exp}年<span><o:p></o:p></span></span></p>
   </td>
  </tr>
 </table>

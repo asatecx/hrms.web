@@ -23,8 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 import af.base.controller.BaseController;
 import af.base.service.PdfReportService;
 import af.base.util.DateUtils;
-import hrms.model.ResumeBase;
+import hrms.model.PeopleBase;
 import hrms.model.ResumeProject;
+import hrms.wapi.person.PeopleService;
 
 /*************************************************************************
  * Copyright     Asatecx Co.,Ltd.<br/>
@@ -40,6 +41,10 @@ public class ResumeController extends BaseController  {
 	@Autowired
     @Qualifier("main.pdfReportService")
     protected PdfReportService pdfReportService;
+
+	@Autowired
+    @Qualifier("hrms.peopleService")
+    protected PeopleService peopleService;
 
 	@Autowired
     @Qualifier("hrms.resumeService")
@@ -79,58 +84,17 @@ public class ResumeController extends BaseController  {
 	private Map<String,Object> createData(Map<String,Object> param){
 		Map<String,Object> resume = new HashMap<String,Object>();
 		// 個人基本情報
-		ResumeBase resumeBase = new ResumeBase();
-		resumeBase.setNameKj(String.valueOf(param.get("USER_NAME_KANJI")));
-		resumeBase.setNameKn(String.valueOf(param.get("USER_NAME_KANA")));
-		resumeBase.setGender(String.valueOf(param.get("GENDER")));
-		resumeBase.setBirthday(String.valueOf(param.get("BIRTHDAY")));
-		int age = DateUtils.getAge(String.valueOf(param.get("BIRTHDAY")));
-		resumeBase.setAge(String.valueOf(age));
-		resumeBase.setJpLevel(String.valueOf(param.get("JAPANESELEVEL")));
-		resumeBase.setCountry(String.valueOf(param.get("COUNTRY")));
-		resumeBase.setStation(String.valueOf(param.get("STATION")));
-		resumeBase.setEducation(String.valueOf(param.get("EDUCATION")));
-		resumeBase.setMajor(String.valueOf(param.get("MAJOR")));
-		resumeBase.setGraduation(String.valueOf(param.get("GRADUATIONDATE")));
-		resumeBase.setJapanYears(String.valueOf(param.get("JAPAN_EXP")));
-		resumeBase.setWorkYears(String.valueOf(param.get("WORK_EXP")));
+		PeopleBase user = new PeopleBase();
+		user.setPerson_id(String.valueOf(param.get("PERSON_ID")));
+		PeopleBase resumeBase = peopleService.find(user);
+
+		String gender = "1".equals(resumeBase.getGender())? "男" : "女";
+		resumeBase.setGender(gender);
+		resumeBase.setAge(String.valueOf(DateUtils.getAge(resumeBase.getBirthday())));
 
 		Map<String, Object> skillMap = resumeService.selectSkills(param);
 
         List<ResumeProject> projects = resumeService.selectProjectList(param);
-
-//        ResumeProject project1 = new ResumeProject();
-//        project1.setNo("1");
-//        project1.setDevFrom("2015/4/1");
-//        project1.setDevTo("2016/3/31");
-//        project1.setWorkplace("日本");
-//        project1.setProjectName("電力システム開発");
-//        project1.setProjectType("エネルギー");
-//        project1.setDevLanguage("Java");
-//        project1.setDevTool("Eclipse");
-//        project1.setOS("Windows");
-//        project1.setDB("Oracle");
-//        project1.setCharge("SE");
-//        project1.setDescription("該当会社生産システムを運用監視、通信システム既存システムに従って、機能追加や強化する作業を行う");
-//        project1.setDevPhase(devPhase);
-//
-//        ResumeProject project2 = new ResumeProject();
-//        project2.setNo("2");
-//        project2.setDevFrom("2018/5/1");
-//        project2.setDevTo("2020/4/30");
-//        project2.setWorkplace("日本");
-//        project2.setProjectName("データ移行システム");
-//        project2.setProjectType("販売");
-//        project2.setDevLanguage("Java");
-//        project2.setDevTool("Eclipse");
-//        project2.setOS("Linux");
-//        project2.setDB("MySQL");
-//        project2.setCharge("PL");
-//        project2.setDescription("DataSpider ツールを利用し、多種類データベースからOracleへのデータ移行作業を実施する詳細設計～結合テストまで担当する");
-//        project2.setDevPhase(devPhase);
-//
-//        projects.add(project1);
-//        projects.add(project2);
 
         resume.put("resumeBase", resumeBase);
         resume.put("programLanguage", skillMap.get("lan"));

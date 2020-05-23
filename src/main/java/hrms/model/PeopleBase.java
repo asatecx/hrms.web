@@ -36,5 +36,6 @@ public class PeopleBase extends BaseDataModel{
 	private String	schedualend ;
 	private String	japaneselevel ;
 	private String	graduationdate ;
+	private String	age;
 
 }
