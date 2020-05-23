@@ -30,6 +30,7 @@ public class PeopleService extends HrmsSimpleDaoService {
 		return super.updateFree(false, baseinfo,
 				new String[] {
 						"PRICE_MIN",
+						"PRICE_MAX",
 						"SCHEDUALSTART",
 						"SCHEDUALEND",
 						"STATUS"
@@ -66,7 +67,7 @@ public class PeopleService extends HrmsSimpleDaoService {
 						"COMPANY",
 						"CONTRACT_TYPE",
 						"STATUS",
-						"PRICE_MIN",
+						//"PRICE_MIN",
 						//"PRICE_MAX",
 						"SCHEDUALSTART",
 						"SCHEDUALEND",
