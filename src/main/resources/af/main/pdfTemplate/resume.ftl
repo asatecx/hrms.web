@@ -32,7 +32,7 @@
   </td>
   <td align=center style='width:25%;border:solid black .5pt;
   background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.user_name_kana}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.user_name_kana!}<span><o:p></o:p></span></span></p>
   </td>
   <td align=center style='width:7%;border:solid black .5pt;
   border-left:none;background:#CCCCCC;padding:0mm 0mm 0mm 0mm'>
@@ -62,23 +62,23 @@
   </td>
   <td rowspan=2　align=center style='width:25%;border:solid black .5pt;
   background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.user_name_kanji}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.user_name_kanji!}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=2　valign=center style='width:7%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.gender}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.gender!}<span><o:p></o:p></span></span></p>
   </td>
   <td align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.birthday}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.birthday!}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=2　align=center style='width:12%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.japaneselevel}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.japaneselevel!}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=2　align=center style='width:10%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.country}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.country!}<span><o:p></o:p></span></span></p>
   </td>
   <td align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
@@ -88,11 +88,11 @@
  <tr>
   <td align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.age} 歳<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.age!} 歳<span><o:p></o:p></span></span></p>
   </td>
   <td align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.station}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.station!}<span><o:p></o:p></span></span></p>
   </td>
  </tr>
  <tr>
@@ -121,23 +121,23 @@
  <tr>
   <td colspan=3 align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.education}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.education!}<span><o:p></o:p></span></span></p>
   </td>
   <td colspan=2 align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.major}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.major!}<span><o:p></o:p></span></span></p>
   </td>
   <td colspan=1 align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.graduationdate}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.graduationdate!}<span><o:p></o:p></span></span></p>
   </td>
   <td colspan=1 align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.work_exp}年<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.work_exp!}年<span><o:p></o:p></span></span></p>
   </td>
   <td colspan=1 align=center style='width:15%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.japan_exp}年<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.8pt'><span style='font-size:10.0pt;'>${resumeBase.japan_exp!}年<span><o:p></o:p></span></span></p>
   </td>
  </tr>
 </table>
@@ -175,17 +175,17 @@
   <td valign=top style='width:14.06%;border-top:none;border-left:none;
   border-bottom:solid black .5pt;border-right:solid black .5pt;
   background:white;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.skill}<o:p></o:p></span></p>
+  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.skill!}<o:p></o:p></span></p>
   </td>
   <td valign=top style='width:14.06%;border-top:none;border-left:
   none;border-bottom:solid black .5pt;border-right:solid black .5pt;
   background:white;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.exp}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.exp!}<span><o:p></o:p></span></span></p>
   </td>
   <td valign=top style='width:64.06%;border-top:none;border-left:none;
   border-bottom:solid black .5pt;border-right:solid black .5pt;
   background:white;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.levelContent}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.levelContent!}<span><o:p></o:p></span></span></p>
   </td>
  </tr>
  </#list>
@@ -200,16 +200,16 @@
   <td valign=top style='width:14.06%;border-top:none;border-left:none;
   border-bottom:solid black .5pt;border-right:solid black .5pt;
   background:white;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.skill}<o:p></o:p></span></p>
+  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.skill!}<o:p></o:p></span></p>
   </td>
   <td valign=top style='width:14.06%;border-top:none;border-left:none;
   border-bottom:solid black .5pt;border-right:solid black .5pt;
   background:white;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.exp}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.exp!}<span><o:p></o:p></span></span></p>
   </td>
   <td valign=top style='width:64.06%;border-top:none;border-left:none;
   background:white;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.levelContent}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.levelContent!}<span><o:p></o:p></span></span></p>
   </td>
  </tr>
  </#list>
@@ -224,17 +224,17 @@
   <td valign=top style='width:14.06%;border-top:none;border-left:none;
   border-bottom:solid black .5pt;border-right:solid black .5pt;
   background:white;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.skill}<o:p></o:p></span></p>
+  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.skill!}<o:p></o:p></span></p>
   </td>
   <td valign=top style='width:14.06%;border-top:none;border-left:none;
   border-bottom:solid black .5pt;border-right:solid black .5pt;
   background:white;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.exp}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.exp!}<span><o:p></o:p></span></span></p>
   </td>
   <td valign=top style='width:64.06%;border-top:none;border-left:
   none;border-bottom:solid black .5pt;border-right:solid black .5pt;
   background:white;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.levelContent}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:3.0pt'><span style='font-size:9.0pt;'>${skill.levelContent!}<span><o:p></o:p></span></span></p>
   </td>
  </tr>
  </#list>
@@ -322,15 +322,15 @@
  <tr>
   <td rowspan=4 valign=top align=center style='width:2%;border-top:none;
   border-left:solid black .5pt;border-bottom:solid black .5pt;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p><span style='font-size:9.0pt;'>${project.no}<span><o:p></o:p></span></span></p>
+  <p><span style='font-size:9.0pt;'>${project.no!}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=center style='width:6%;border:solid black .5pt;
   background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p><span style='font-size:10.0pt;'><o:p>${project.devFrom}<br/>～<br/>${project.devTo}</o:p></span></p>
+  <p><span style='font-size:10.0pt;'><o:p>${project.devFrom!}<br/>～<br/>${project.devTo!}</o:p></span></p>
   </td>
   <td rowspan=4 align=center style='width:5%;border:solid black .5pt;
   background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p><span style='font-size:10.0pt;'><o:p>${project.workplace}</o:p></span></p>
+  <p><span style='font-size:10.0pt;'><o:p>${project.workplace!}</o:p></span></p>
   </td>
   <td rowspan=1 align=left style='width:2%;border:solid black .5pt;
   background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
@@ -338,7 +338,7 @@
   </td>
   <td rowspan=1 align=left style='width:12%;border:solid black .5pt;
   background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:2.0pt'><span style='font-size:6.0pt;'>${project.projectName}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:2.0pt'><span style='font-size:6.0pt;'>${project.projectName!}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=1 align=left style='width:2%;border:solid black .5pt;
   background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
@@ -346,61 +346,61 @@
   </td>
   <td rowspan=1 align=left style='width:3%;border:solid black .5pt;
   background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:2.0pt'><span style='font-size:6.0pt;'>${project.projectType}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:2.0pt'><span style='font-size:6.0pt;'>${project.projectType!}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=left style='width:7%;border:solid black .5pt;
   background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.0pt'><span style='font-size:10.0pt;'>${project.OS}/${project.DB}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.0pt'><span style='font-size:10.0pt;'>${project.OS!}/${project.DB!}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=left style='width:8%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:4.0pt'><span style='font-size:10.0pt;'>${project.devLanguage}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:4.0pt'><span style='font-size:10.0pt;'>${project.devLanguage!}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=center style='width:3%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p><span style='font-size:10.0pt;'>${project.charge}<span><o:p></o:p></span></span></p>
+  <p><span style='font-size:10.0pt;'>${project.charge!}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=center style='width:1%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p><span style='font-size:8.0pt;'>${project.RD}<span><o:p></o:p></span></span></p>
+  <p><span style='font-size:8.0pt;'>${project.RD!}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=center style='width:1%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p ><span style='font-size:8.0pt;'>${project.BD}<span><o:p></o:p></span></span></p>
+  <p ><span style='font-size:8.0pt;'>${project.BD!}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=center style='width:1%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p><span style='font-size:8.0pt;'>${project.FD}<span><o:p></o:p></span></span></p>
+  <p><span style='font-size:8.0pt;'>${project.FD!}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=center style='width:1%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p><span style='font-size:8.0pt;'>${project.DD}<span><o:p></o:p></span></span></p>
+  <p><span style='font-size:8.0pt;'>${project.DD!}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=center style='width:1%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p><span style='font-size:8.0pt;'>${project.CD}<span><o:p></o:p></span></span></p>
+  <p><span style='font-size:8.0pt;'>${project.CD!}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=center style='width:1%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p><span style='font-size:8.0pt;'>${project.UT}<span><o:p></o:p></span></span></p>
+  <p><span style='font-size:8.0pt;'>${project.UT!}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=center style='width:1%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p><span style='font-size:8.0pt;'>${project.IT}<span><o:p></o:p></span></span></p>
+  <p><span style='font-size:8.0pt;'>${project.IT!}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=center style='width:1%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p><span style='font-size:8.0pt;'>${project.ST}<span><o:p></o:p></span></span></p>
+  <p><span style='font-size:8.0pt;'>${project.ST!}<span><o:p></o:p></span></span></p>
   </td>
   <td rowspan=4 align=center style='width:1%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p><span style='font-size:8.0pt;'>${project.OT}<span><o:p></o:p></span></span></p>
+  <p><span style='font-size:8.0pt;'>${project.OT!}<span><o:p></o:p></span></span></p>
   </td>
  </tr>
  <tr>
   <td rowspan=3 colspan=4 valign=top style='width:1%;border:solid black .5pt;
   border-left:none;background:#FFFFFF;padding:0mm 0mm 0mm 0mm'>
-  <p style='margin-left:2.0pt'><span style='font-size:8.0pt;'>${project.description}<span><o:p></o:p></span></span></p>
+  <p style='margin-left:2.0pt'><span style='font-size:8.0pt;'>${project.description!}<span><o:p></o:p></span></span></p>
   </td>
  </tr>
  </#list>

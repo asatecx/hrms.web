@@ -15,6 +15,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -90,7 +91,10 @@ public class ResumeController extends BaseController  {
 
 		String gender = "1".equals(resumeBase.getGender())? "男" : "女";
 		resumeBase.setGender(gender);
-		resumeBase.setAge(String.valueOf(DateUtils.getAge(resumeBase.getBirthday())));
+
+		if(!ObjectUtils.isEmpty(resumeBase.getBirthday())) {
+			resumeBase.setAge(String.valueOf(DateUtils.getAge(resumeBase.getBirthday())));
+		}
 
 		Map<String, Object> skillMap = resumeService.selectSkills(param);
 
