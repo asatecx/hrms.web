@@ -1,12 +1,18 @@
 package af.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
+
+	@Autowired
+    private Environment env;
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
@@ -18,14 +24,10 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/videos/**")
-//                .addResourceLocations("classpath:/static/")
-//                .addResourceLocations("classpath:/public/")
-                //.addResourceLocations("file:/home/hrms/videos/");
-                .addResourceLocations("file:/C:/Resources/videos/");
-//        		.addResourceLocations("file:/C:/E/yule/Adt/");
-        
+        		.addResourceLocations("file:" + env.getProperty("file.upload.video"));
+
         registry.addResourceHandler("/photos/**")
-                .addResourceLocations("file:/C:/Resources/photos/");
+        		.addResourceLocations("file:" + env.getProperty("file.upload.photo"));
     }
 //    @Bean
 //    public CorsFilter corsFilter() {
