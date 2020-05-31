@@ -36,7 +36,7 @@ public class PeopleService extends HrmsSimpleDaoService {
 						"STATUS"
 		                 },
 						"PERSON_ID"
-						//,"UPDATE_DATE_TIME"
+						,"UPDATE_DATE_TIME"
 						);
 	}
 	@Transactional("hrms.tx")

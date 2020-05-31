@@ -46,8 +46,9 @@ public class HeroController {
 	    @CrossOrigin
 	    @RequestMapping(value = "/tanka",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
 	    public String modifyTankaAndSchedule(@ModelAttribute  PeopleBase tankainfo) {
-
+	    	System.out.println(tankainfo.getUPDATE_DATE_TIME());
 	    	int count=peopleService.updateTanka(tankainfo);
+	    	
 	    	
 	    	if(count>=1) {
 	    		return "OK";
