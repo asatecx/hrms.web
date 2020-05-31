@@ -115,13 +115,24 @@ public class HeroController {
 	    @CrossOrigin
 	    @RequestMapping(value = "/interviewList", method = RequestMethod.GET)
 	    public List<Interview> getInterviewList(@RequestParam   String casename,
+	    									@RequestParam   String casetime,
+	    									@RequestParam   String caseplace,
+	    									@RequestParam   String result,
 	    		                            @RequestParam   String  userid,
 	    		                            @RequestParam   int currentPage,
 	    		                            @RequestParam   int pagesize
 	    		) {
+	    	if("".equals(casename))casename=null;
+	    	if("".equals(casetime))casetime=null;
+	    	if("".equals(caseplace))caseplace=null;
+	    	if("".equals(result))result=null;
 	     
 	         Map<String, Object> param = new HashMap<String, Object>();
 	         param.put("personId", userid);
+	         param.put("casename", casename);
+	         param.put("casetime", casetime);
+	         param.put("caseplace", caseplace);
+	         param.put("result", result);
 	         param.put("mylimit", pagesize);
 	         param.put("myoffset", pagesize*(currentPage-1));
 	         List<Interview> interviewList= peopleService.selectList("hrms.people.selectInterviewList",param,null);

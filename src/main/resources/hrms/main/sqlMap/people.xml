@@ -72,9 +72,19 @@
           ,INTERVIEW_DATE as interviewdate
           ,START_TIME as starttime
           ,END_TIME as endtime
-          ,CONCAT(INTERVIEW_DATE,' ',START_TIME,'～',END_TIME) AS INTERVIEW_DATETIME
+          ,CONCAT(INTERVIEW_DATE,'　　',START_TIME,'～',END_TIME) AS INTERVIEW_DATETIME
           ,WORK_CONTENTS as workcontents
-          ,INTERVIEW_RESULT as interviewresult
+          ,CASE INTERVIEW_RESULT
+WHEN '1' THEN '招待された'
+WHEN '2' THEN '面接を受けた'
+WHEN '3' THEN '面接を断った'
+WHEN '4' THEN '結果まち'
+WHEN '5' THEN '合格'
+WHEN '6' THEN '不合格'
+WHEN '7' THEN '面接がキャンセルされた'
+WHEN '8' THEN '面接参加をキャンセルした'
+WHEN '9' THEN '合格を辞退した'
+ELSE 'なし' END as interviewresult
           ,CREATE_USER 
           ,CREATE_DATE_TIME 
           ,UPDATE_USER 
@@ -87,6 +97,18 @@
           1 = 1
           <if test="personId != null">
             AND PERSON_ID = #{personId}
+          </if>
+           <if test="casename != null">
+            AND CASE_NAME like concat('%',#{casename},'%')
+          </if>
+           <if test="casetime != null">
+            AND INTERVIEW_DATE like concat('%',#{casetime},'%')
+          </if>
+          <if test="caseplace != null">
+            AND INTERVIEW_PLACE like concat('%',#{caseplace},'%')
+          </if>
+           <if test="result != null">
+            AND INTERVIEW_RESULT =#{result}
           </if>
           ORDER BY UPDATE_DATE_TIME DESC
           LIMIT  #{mylimit}
