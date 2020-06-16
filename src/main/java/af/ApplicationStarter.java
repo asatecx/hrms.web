@@ -61,7 +61,7 @@ public class ApplicationStarter  {
     @Autowired
     public MessageSource messageSource() {
         MyResourceBundleMessageSource messageSource = new MyResourceBundleMessageSource();
-        messageSource.setBasenames("af/messages/message", "xxx/messages/message", "hrms/messages/message");
+        messageSource.setBasenames("af/messages/message_ja_JP", "xxx/messages/message", "hrms/messages/message");
         messageSource.setCacheSeconds(600);
         messageSource.setDefaultEncoding("UTF-8");
         messageSource.setUseCodeAsDefaultMessage(true);

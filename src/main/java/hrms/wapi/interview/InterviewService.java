@@ -41,22 +41,25 @@ public class InterviewService extends HrmsSimpleDaoService {
 	@Transactional("hrms.tx")
 	public void updateInterview(Interview interview) {
 		// 面接情報更新
-		super.updateFree(true, interview,
+		// TODO ture的时候docker发布后排他更新有错误
+		super.updateFree(false, interview,
 				new String[] {
-						"CASE_NAME",
-						"WORK_PLACE",
-						"INTERVIEW_PLACE",
-						"INTERVIEW_DATE",
-						"START_TIME",
-						"END_TIME",
-						"WORK_CONTENTS",
-						"INTERVIEW_RESULT",
-						"UPDATE_USER",
-						"UPDATED_BY",
-						"UPDATE_DATE_TIME" },
-						"PERSON_ID",
-						"COMPANY_ID",
-						"UPDATE_DATE_TIME");
+						"CASE_NAME"
+						,"WORK_PLACE"
+						,"INTERVIEW_PLACE"
+						,"INTERVIEW_DATE"
+						,"START_TIME"
+						,"END_TIME"
+						,"WORK_CONTENTS"
+						,"INTERVIEW_RESULT"
+						,"UPDATE_USER"
+						,"UPDATED_BY"
+						,"UPDATE_DATE_TIME"
+						},
+						"PERSON_ID"
+						,"COMPANY_ID"
+//						,"UPDATE_DATE_TIME"
+						);
 	}
 
 	/**
@@ -67,15 +70,18 @@ public class InterviewService extends HrmsSimpleDaoService {
 	@Transactional("hrms.tx")
 	public void deleteInterview(Interview interview) {
 		// 面接情報更新
-		super.updateFree(true, interview,
+		// TODO ture的时候docker发布后排他更新有错误
+		super.updateFree(false, interview,
 				new String[] {
-						"INTERVIEW_RESULT",
-						"UPDATE_USER",
-						"UPDATED_BY",
-						"UPDATE_DATE_TIME" },
-						"PERSON_ID",
-						"COMPANY_ID",
-						"UPDATE_DATE_TIME");
+						"INTERVIEW_RESULT"
+						,"UPDATE_USER"
+						,"UPDATED_BY"
+						,"UPDATE_DATE_TIME"
+						},
+						"PERSON_ID"
+						,"COMPANY_ID"
+//						,"UPDATE_DATE_TIME"
+						);
 	}
 
 }
