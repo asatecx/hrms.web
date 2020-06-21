@@ -72,8 +72,8 @@ public class PeopleService extends HrmsSimpleDaoService {
 						"SCHEDUALSTART",
 						"SCHEDUALEND",
 						"JAPANESELEVEL",
-						"GRADUATIONDATE"
-
+						"GRADUATIONDATE",
+						"EXP_PR"
 		                 },
 						"PERSON_ID"
 						//,"UPDATE_DATE_TIME"
