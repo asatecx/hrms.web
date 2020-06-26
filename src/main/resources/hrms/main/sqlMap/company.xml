@@ -131,6 +131,7 @@
        ,JAPANESELEVEL
        ,GRADUATIONDATE
        ,DATE_FORMAT(UPDATE_DATE_TIME, '%Y/%m/%d') AS UPDATE_DATE_TIME
+       ,EXP_PR
       FROM
           T_B_PERSON_BASE
       WHERE
@@ -205,6 +206,7 @@
        ,JAPANESELEVEL
        ,GRADUATIONDATE
        ,DATE_FORMAT(UPDATE_DATE_TIME, '%Y/%m/%d') AS UPDATE_DATE_TIME
+       ,EXP_PR
       FROM
           T_B_PERSON_BASE
       WHERE
