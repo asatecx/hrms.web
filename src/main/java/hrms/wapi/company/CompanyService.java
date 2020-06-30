@@ -1,8 +1,13 @@
 package hrms.wapi.company;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import af.base.model.mail.Mail;
+import af.base.service.mail.SendEmailService;
+import af.base.util.MD5Util;
 import af.main.model.Login;
 import af.main.model.User;
 import hrms.model.Company;
@@ -21,6 +26,10 @@ import hrms.wapi.base.HrmsSimpleDaoService;
 @Service("hrms.companyService")
 public class CompanyService extends HrmsSimpleDaoService {
 
+	@Autowired
+    @Qualifier("sendEmailService")
+	private SendEmailService sendEmailService;
+
 	/**
      * 会社情報登録.
      * @param company
@@ -32,8 +41,27 @@ public class CompanyService extends HrmsSimpleDaoService {
 		if (checkUser != null) {
 			return false;
 		}
+		String validateCode = MD5Util.md5Encrypt32Upper(company.getMail());
+		login.setValidateCode(validateCode);
 		super.insert(true, login);
 		super.insert(true, company);
+		sendMail(company.getMail(), validateCode);
+		return true;
+	}
+
+	/**
+     * 会社情報有効.
+     * @param login
+     * @return boolean
+     */
+	@Transactional("hrms.tx")
+	public boolean activateCompany(Login login, String validateCode) {
+		Login loginInfo = super.find(login);
+		if(!validateCode.equals(loginInfo.getValidateCode())) {
+			return false;
+		}
+		loginInfo.setVALIDFLG("1");
+		super.update(true, loginInfo);
 		return true;
 	}
     /**
@@ -66,5 +94,35 @@ public class CompanyService extends HrmsSimpleDaoService {
         company = super.find(company);
         return company;
     }
+
+	private String sendMail(String sendTo, String validateCode) {
+
+		String mailText = "こんにちは" + sendTo + "\r\n";
+		mailText += "HRMSへのサインアップありがとうございます！\r\n";
+		mailText += "アカウントを開くには下記のリンクをクリックしてメールアドレスの認証をしてください：\r\n";
+		mailText += "http://127.0.0.1:8091/company/activate/"+ sendTo + "/" + validateCode;
+		mailText += "\r\n";
+		mailText += "ご利用ありがとうございます！";
+		String[] arySendTo = sendTo.split(";");
+		Mail mail = new Mail();
+		mail.setSmtp_host("smtp22.gmoserver.jp");
+		mail.setPort("587");
+		mail.setSocketFactory_port("587");
+		mail.setSmtp_auth(true);
+		mail.setDebug(false);
+		mail.setFallback(false);
+		mail.setSsl(false);
+		mail.setStore_protocol("pop3");
+		mail.setTransport_protocol("smtp");
+		mail.setUsername("admin@asatecx.com");
+		mail.setPassword("F#fk8kD#");
+		mail.setMail_from("admin@asatecx.com");
+		mail.setMail_to(arySendTo);
+		mail.setMail_subject("Confirm your HRMS account please");
+		mail.setMail_text(mailText);
+		sendEmailService.sendmail(mail);
+
+		return "mail";
+	}
 
 }

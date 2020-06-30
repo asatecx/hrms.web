@@ -80,6 +80,10 @@ public class LoginController extends BaseController {
 
             return new JsonModel(false, this.getMessage("main.login.error.mailPwd"));
         }
+        // アカウント有効性チェック
+        if (!"1".equals(user.getValidFlg())) {
+            return new JsonModel(false, this.getMessage("アカウント認証されていません。"));
+        }
 
         // その他情報取得
 //        Company company = loginService.getCompany(user.getCOMPANY_ID());

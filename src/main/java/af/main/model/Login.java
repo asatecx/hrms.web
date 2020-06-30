@@ -10,11 +10,13 @@ public class Login extends BaseDataModel {
 
     private static final long serialVersionUID = 1L;
 
-    private String USER_ID;
+    private String USERID;
 
     private String PASSWORD;
 
-    private String USER_TYPE;
+    private String USERTYPE;
 
-    private String VALID_FLG;
+    private String VALIDFLG;
+
+    private String validateCode;
 }
