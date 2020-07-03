@@ -8,10 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 import af.base.model.mail.Mail;
 import af.base.service.mail.SendEmailService;
 import af.base.util.MD5Util;
-import af.main.model.Login;
 import af.main.model.User;
 import hrms.model.Company;
 import hrms.model.Constants;
+import hrms.model.Login;
 import hrms.wapi.base.HrmsSimpleDaoService;
 
 /*************************************************************************
@@ -60,7 +60,7 @@ public class CompanyService extends HrmsSimpleDaoService {
 		if(!validateCode.equals(loginInfo.getValidateCode())) {
 			return false;
 		}
-		loginInfo.setVALIDFLG("1");
+		loginInfo.setValidFlg("1");
 		super.update(true, loginInfo);
 		return true;
 	}

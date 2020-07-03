@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import af.base.controller.BaseController;
 import af.base.model.JsonModel;
-import af.main.model.Login;
 import hrms.model.Company;
+import hrms.model.Login;
 
 /*************************************************************************
  * Copyright     Asatecx Co.,Ltd.<br/>
@@ -39,10 +39,10 @@ public class CompanyController extends BaseController  {
     	company.setUserId(company.getMail());
 
     	Login login = new Login();
-    	login.setUSERID(company.getUserId());
-    	login.setPASSWORD(company.getPassword());
-    	login.setUSERTYPE("2");
-    	login.setVALIDFLG("0");
+    	login.setUserId(company.getUserId());
+    	login.setPassword(company.getPassword());
+    	login.setUserType("2");
+    	login.setValidFlg("0");
 
     	boolean ret = companyService.registCompany(company, login);
     	if (!ret) {
@@ -55,8 +55,8 @@ public class CompanyController extends BaseController  {
     public JsonModel activate(@PathVariable String mailaddr, @PathVariable String validateCode) throws Exception {
 
     	Login login = new Login();
-    	login.setUSERID(mailaddr);
-    	login.setVALIDFLG("1");
+    	login.setUserId(mailaddr);
+    	login.setValidFlg("1");
 
     	boolean ret = companyService.activateCompany(login, validateCode);
     	if (!ret) {
