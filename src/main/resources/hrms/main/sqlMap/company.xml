@@ -213,4 +213,13 @@
           PERSON_ID = #{personId}
     </select>
 
+    <select id="selectNewCaseId" parameterType="map" resultType="java.lang.Integer">
+      SELECT
+          IFNULL(MAX(CASEID),0) + 1 AS NEWCASEID
+      FROM
+          T_B_CASE
+      WHERE
+          USERID = #{userId}
+    </select>
+
 </mapper>

@@ -15,6 +15,7 @@ import af.base.controller.BaseController;
 import af.base.model.JsonModel;
 import af.main.model.Login;
 import hrms.model.Company;
+import hrms.model.CompanyCase;
 
 /*************************************************************************
  * Copyright     Asatecx Co.,Ltd.<br/>
@@ -48,6 +49,18 @@ public class CompanyController extends BaseController  {
             return new JsonModel(false, "会社重複登録");
         }
         return new JsonModel(true, "会社登録成功。");
+    }
+
+    @RequestMapping(value = "/company/case/regist", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)
+    public JsonModel registCase(@RequestBody Map<String, Object> param) throws Exception {
+    	CompanyCase companyCase = new CompanyCase();
+    	BeanUtils.populate(companyCase, param);
+    	companyCase.setValidFlg("1");
+    	boolean ret = companyService.registCase(companyCase);
+    	if (!ret) {
+            return new JsonModel(false, "案件重複登録。");
+        }
+        return new JsonModel(true, "案件登録成功。");
     }
 
 }

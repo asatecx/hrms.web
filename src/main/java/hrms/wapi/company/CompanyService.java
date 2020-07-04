@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import af.main.model.Login;
 import af.main.model.User;
 import hrms.model.Company;
+import hrms.model.CompanyCase;
 import hrms.model.Constants;
 import hrms.wapi.base.HrmsSimpleDaoService;
 
@@ -65,6 +66,23 @@ public class CompanyService extends HrmsSimpleDaoService {
         company.setUserId(companyId);
         company = super.find(company);
         return company;
+    }
+
+    /**
+     * get company info.
+     * @param companyId company Id
+     * @return Company info
+     */
+    @Transactional("hrms.tx")
+    public boolean registCase(CompanyCase companyCase) {
+		CompanyCase checkCase = super.find(companyCase);
+		if (checkCase != null) {
+			return false;
+		}
+		int newCaseId = baseDao.selectOne("hrms.company.selectNewCaseId", companyCase, null);
+		companyCase.setCaseId(newCaseId);
+		super.insert(true, companyCase);
+		return true;
     }
 
 }
