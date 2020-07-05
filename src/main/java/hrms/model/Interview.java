@@ -11,7 +11,7 @@ public class Interview extends BaseDataModel {
     private static final long serialVersionUID = 1L;
 
     private String interviewId;
-    
+
     private String personId;
 
     private String companyId;
@@ -22,16 +22,28 @@ public class Interview extends BaseDataModel {
 
     private String interviewplace;
 
-    private String interviewdate;
+    private String interviewdate1;
 
-    private String starttime;
+    private String starttime1;
 
-    private String endtime;
+    private String endtime1;
+
+    private String interviewdate2;
+
+    private String starttime2;
+
+    private String endtime2;
+
+    private String interviewdate3;
+
+    private String starttime3;
+
+    private String endtime3;
 
     private String workcontents;
 
     private String interviewresult;
-    
+
     private String interview_datetime;
 
 }

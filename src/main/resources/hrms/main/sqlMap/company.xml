@@ -10,10 +10,18 @@
           ,A.CASE_NAME
           ,A.WORK_PLACE
           ,A.INTERVIEW_PLACE
-          ,A.INTERVIEW_DATE
-          ,A.START_TIME
-          ,A.END_TIME
-          ,CONCAT(A.INTERVIEW_DATE,' ',A.START_TIME,'～',A.END_TIME) AS INTERVIEW_DATETIME
+          ,A.INTERVIEW_DATE1
+          ,A.START_TIME1
+          ,A.END_TIME1
+          ,CONCAT(A.INTERVIEW_DATE1,' ',A.START_TIME1,'～',A.END_TIME1) AS INTERVIEW_DATETIME1
+          ,A.INTERVIEW_DATE2
+          ,A.START_TIME2
+          ,A.END_TIME2
+          ,CONCAT(A.INTERVIEW_DATE2,' ',A.START_TIME2,'～',A.END_TIME2) AS INTERVIEW_DATETIME2
+          ,A.INTERVIEW_DATE3
+          ,A.START_TIME3
+          ,A.END_TIME3
+          ,CONCAT(A.INTERVIEW_DATE3,' ',A.START_TIME3,'～',A.END_TIME3) AS INTERVIEW_DATETIME3
           ,A.WORK_CONTENTS
           ,A.INTERVIEW_RESULT
           ,CASE A.INTERVIEW_RESULT
@@ -50,10 +58,10 @@
             AND A.CASE_NAME LIKE concat('%',#{caseName},'%')
           </if>
           <if test="from != null and from != ''">
-            AND A.INTERVIEW_DATE <![CDATA[ >= ]]> #{from}
+            AND A.INTERVIEW_DATE1 <![CDATA[ >= ]]> #{from}
           </if>
           <if test="to != null and to != ''">
-            AND A.INTERVIEW_DATE <![CDATA[ <= ]]> #{to}
+            AND A.INTERVIEW_DATE1 <![CDATA[ <= ]]> #{to}
           </if>
     </select>
 
