@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import hrms.model.Company;
 import hrms.model.Constants;
 import hrms.model.Login;
+import hrms.model.PeopleBase;
 import hrms.wapi.base.HrmsSimpleDaoService;
 
 /*************************************************************************
@@ -36,6 +37,13 @@ public class LoginService extends HrmsSimpleDaoService {
         }
         return user;
     }
+    
+    public PeopleBase getpeopleBase(String person_id) {
+    	PeopleBase people = new PeopleBase();
+    	people.setPerson_id(person_id);
+    	people = baseDao.find(people);
+        return people;
+    }
 
     /**
      * get company info.
@@ -57,6 +65,23 @@ public class LoginService extends HrmsSimpleDaoService {
     public boolean insertLoginUser(Login user) {
 
         int result = baseDao.insert(false, user);
+
+        if(result>=1) {
+        	return true;
+        }else {
+        	return false;
+        }
+
+
+    }
+    /**
+     * update loginUser
+     * @param Login
+     * @return user
+     */
+    public boolean updateLoginUser(Login user) {
+
+        int result = baseDao.update(false, user);
 
         if(result>=1) {
         	return true;

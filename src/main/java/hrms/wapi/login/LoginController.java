@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import af.base.controller.BaseController;
 import af.base.model.ClientInformation;
 import af.base.model.JsonModel;
+import af.base.model.mail.Mail;
 import af.base.orm.annotation.ClientDetail;
+import af.base.service.mail.SendEmailService;
 import af.base.util.InputCheckUtil;
 import hrms.model.PeopleBase;
 import hrms.wapi.person.PeopleService;
@@ -35,10 +37,13 @@ import hrms.wapi.person.PeopleService;
  ************************************************************************/
 @Scope("request")
 @RestController
+
+@Qualifier("sendEmailService")
 public class LoginController extends BaseController {
     @Autowired
 	private LoginService loginService;
-
+    @Autowired
+    private SendEmailService sendEmailService;
 	@Autowired
     @Qualifier("hrms.peopleService")
     protected PeopleService peopleService;
@@ -177,5 +182,77 @@ public class LoginController extends BaseController {
 
 
     }
+    @CrossOrigin
+    @RequestMapping(value = "/main/changeAcount",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+    public JsonModel changeUserinfo(@ModelAttribute  hrms.model.Login userinfo) {
+    	 boolean result=loginService.updateLoginUser(userinfo);
+         Map<String, Object> dt = new HashMap<String, Object>();
+         if(result) {
+        	 PeopleBase peopleBase=loginService.getpeopleBase(userinfo.getUserId());
+        	 String mailText = "こんにちは" + peopleBase.getMail() + "\r\n";
+        	 mailText += "パスワードが変更されました\r\n";
+        	 sendMail(peopleBase.getMail(),"セキュリティ通知",mailText);
+	         dt.put("res", "OK");
+	         return new JsonModel(dt);
+         }else {
+        	 return new JsonModel("NG");
+         }
+
+
+    }
+    @CrossOrigin
+    @RequestMapping(value = "/main/changePassword",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+    public JsonModel changePassword(@ModelAttribute  hrms.model.Login userinfo) {
+    	String newpassword =new PasswordGenerator(10, 3).generateRandomPassword();
+    	
+    	 hrms.model.Login user = loginService.getUser(userinfo.getUserId());
+    	 user.setPassword(newpassword);
+    	 boolean result=loginService.updateLoginUser(user);
+         Map<String, Object> dt = new HashMap<String, Object>();
+         if(result) {
+        	 PeopleBase peopleBase=loginService.getpeopleBase(userinfo.getUserId());
+        	 
+       	  String mailText = "こんにちは" + peopleBase.getMail() + "\r\n";
+    	  mailText += "新しいパスワード:"+newpassword+"\r\n";
+    	  mailText += "ログインしてから、すぐパスワード変更してください。"+ "\r\n";
+        	 sendMail(peopleBase.getMail(),"セキュリティ通知",mailText);
+	         dt.put("res", "OK");
+	         return new JsonModel(dt);
+         }else {
+        	 return new JsonModel("NG");
+         }
+
+
+    }
+    
+    /**
+     * @param sendTo
+     * @param validateCode
+     * @return
+     */
+    private String sendMail(String sendTo,String title,String mailtext) {
+
+ 
+    	  String[] arySendTo = sendTo.split(";");
+    	  Mail mail = new Mail();
+    	  mail.setSmtp_host("smtp22.gmoserver.jp");
+    	  mail.setPort("587");
+    	  mail.setSocketFactory_port("587");
+    	  mail.setSmtp_auth(true);
+    	  mail.setDebug(false);
+    	  mail.setFallback(false);
+    	  mail.setSsl(false);
+    	  mail.setStore_protocol("pop3");
+    	  mail.setTransport_protocol("smtp");
+    	  mail.setUsername("admin@asatecx.com");
+    	  mail.setPassword("F#fk8kD#");
+    	  mail.setMail_from("admin@asatecx.com");
+    	  mail.setMail_to(arySendTo);
+    	  mail.setMail_subject(title);
+    	  mail.setMail_text(mailtext);
+    	  sendEmailService.sendmail(mail);
+
+    	  return "mail";
+    	 }
 
 }
