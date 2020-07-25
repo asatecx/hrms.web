@@ -304,6 +304,27 @@ public class HeroController {
 	        return mmMap;
 	    }
 	    @CrossOrigin
+	    @RequestMapping(value = "/getskillsourceNoKBN", method = RequestMethod.GET)
+	    public Map getskillsourceNoKBN() {
+	    	
+	    	 Map<String, Object> param = new HashMap<String, Object>();
+	         param.put("type", 1);
+	         List<String> language= peopleService.selectList("hrms.people.selectskills",param,null);
+	         
+	         param.put("type", 2);
+	         List<String> dbs= peopleService.selectList("hrms.people.selectskills",param,null);
+	         
+	         param.put("type", 3);
+	         List<String> oss= peopleService.selectList("hrms.people.selectskills",param,null);
+	         List<String> resultList=new ArrayList<String>();
+	         resultList.addAll(language);
+	         resultList.addAll(dbs);
+	         resultList.addAll(oss);
+	        Map mmMap=new HashMap<String, List>();
+	        mmMap.put("skills", resultList);
+	        return mmMap;
+	    }
+	    @CrossOrigin
 	    @RequestMapping(value = "/getcarearinfo", method = RequestMethod.GET)
 	    public List<PeopleProject> getCarearInfo(@RequestParam   String userid) {
 	         Map<String, Object> param = new HashMap<String, Object>();
