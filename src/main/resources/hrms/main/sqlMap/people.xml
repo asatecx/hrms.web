@@ -19,7 +19,29 @@
             AND SKILLKBN= #{SKILLKBN}
           </if>
     </select>
-    
+    <select id="selectcities" parameterType="map" resultType="String">
+      SELECT
+		city
+      FROM
+          T_B_ADDRESS
+      WHERE
+          1 = 1
+          <if test="Prefecture != null">
+            AND Prefecture= #{Prefecture}
+          </if>
+    </select>
+    <select id="selectskills" parameterType="map" resultType="String">
+      SELECT
+		skill
+      FROM
+          T_B_SKILL
+      WHERE
+          1 = 1
+          <if test="type != null">
+            AND TYPE= #{type}
+          </if>
+          order by priority DESC
+    </select>
   <select id="selectPeopleCarearList" parameterType="map" resultType="hrms.model.PeopleProject">
       SELECT
 		 PERSON_ID

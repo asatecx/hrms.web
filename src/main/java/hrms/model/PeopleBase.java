@@ -38,4 +38,9 @@ public class PeopleBase extends BaseDataModel{
 	private String	graduationdate ;
 	private String	age;
 	private String	exp_pr ;
+	private String	name_privacy;
+	private String	tel_privacy;
+	private String	mail_privacy;
+	private String	birthday_privacy;
+	private String	company_privacy;
 }

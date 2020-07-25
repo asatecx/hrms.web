@@ -72,6 +72,19 @@ public class HeroController {
 	    }
 	    
 	    @CrossOrigin
+	    @RequestMapping(value = "/baseinfoP",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+	    public String modifyBaseInfoP(@ModelAttribute  PeopleBase baseinfo) {
+
+	    	int count=peopleService.updatePersonal(baseinfo);
+	    	
+	    	if(count>=1) {
+	    		return "OK";
+	    	}else {
+	    		return "NG";
+	    	}
+	    }
+	    
+	    @CrossOrigin
 	    @RequestMapping(value = "/skillinfo")
 	    @ResponseBody
 	    public String modifySkillInfo(@RequestBody  Skill skillinfo) {
@@ -221,135 +234,12 @@ public class HeroController {
 	    @CrossOrigin
 	    @RequestMapping(value = "/getaddress", method = RequestMethod.GET)
 	    public List<String> getcities(@RequestParam   String city) {
-	      List<City> cities =new ArrayList<City>();
-	      List<String> townStrings=new ArrayList<String>();
-	      townStrings.add("小樽市");
-	      townStrings.add("旭川市");
-	      townStrings.add("室蘭市");
-	      townStrings.add("釧路市");
-	      townStrings.add("函館市");
-	      List<String> townStrings1=new ArrayList<String>();
-	      townStrings1.add("横須賀市");
-	      townStrings1.add("平塚市");
-	      townStrings1.add("茅ヶ崎市");
-	      townStrings1.add("大和市");
-	      townStrings1.add("海老名市");
+	    	
+	    	 Map<String, Object> param = new HashMap<String, Object>();
+	         param.put("Prefecture", city);
+	         List<String> cities= peopleService.selectList("hrms.people.selectcities",param,null);
 
-	      cities.add(new City("北海道",townStrings));
-	      cities.add(new City("神奈川県",townStrings1));
-
-	        List<City> resutlts = cities.stream()
-	                .filter(province -> province.getProvince().contains(city))
-	                .collect(Collectors.toList());
-	        if(resutlts.size()==0) {
-	        	return new ArrayList<String>();
-	        }
-	        return resutlts.get(0).getCity();
-	    }
-	    @CrossOrigin
-	    @RequestMapping(value = "/getskillsource", method = RequestMethod.GET)
-	    public Map getskillsource() {
-	      List<String> language =new ArrayList<String>();
-	      language.add("java");
-	      language.add("php");
-	      language.add("python");
-	      language.add(".net");
-	      language.add("plsql");
-	      List<String> dbs =new ArrayList<String>();
-	      dbs.add("sqlserver");
-	      dbs.add("oracle");
-	      dbs.add("mysql");
-	      
-	      List<String> oss =new ArrayList<String>();
-	      oss.add("windows");
-	      oss.add("linux");
-	      oss.add("unix");
-
-	        Map mmMap=new HashMap<String, List>();
-	        mmMap.put("language", language);
-	        mmMap.put("db", dbs);
-	        mmMap.put("os", oss);
-	        return mmMap;
-	    }
-	    @CrossOrigin
-	    @RequestMapping(value = "/getCaseDetail", method = RequestMethod.GET)
-	    public caseobj getCaseDetail(@RequestParam   int id) {
-	      List<caseobj> interviewResult =new ArrayList<caseobj>();
-	      interviewResult.add(new caseobj(1,"4月開始、作業場所勝どき<br>日本語１級レベル<br>経験3年<br>java"));
-	      interviewResult.add(new caseobj(2,"6月開始、田町<br>日本語１級レベル<br>経験3年<br>java"));
-	      interviewResult.add(new caseobj(3,"7月開始、東京<br>日本語１級レベル<br>経験3年<br>.net"));
-	      interviewResult.add(new caseobj(4,"8月開始、横浜<br>日本語１級レベル<br>経験3年<br>python"));
-	      interviewResult.add(new caseobj(5,"9月開始、多摩川<br>日本語１級レベル<br>経験3年<br>java"));
-	      interviewResult.add(new caseobj(6,"10月開始、操他的<br>日本語１級レベル<br>経験3年<br>shell"));
-	      interviewResult.add(new caseobj(7,"11月開始、日妹<br>日本語１級レベル<br>経験3年<br>java"));
-	      interviewResult.add(new caseobj(8,"12月開始、日姉姉<br>日本語１級レベル<br>経験3年<br>java"));
-	        List<caseobj> resutlts = interviewResult.stream()
-	                .filter(caseobj -> caseobj.getId()==id)
-	                .collect(Collectors.toList());
-	        return resutlts.get(0);
-	    }
-	    @CrossOrigin
-	    @RequestMapping(value = "/getCaseList", method = RequestMethod.GET)
-	    public List<caseobj> getCaseList(@RequestParam   String keyword) {
-	      List<caseobj> interviewResult =new ArrayList<caseobj>();
-	      interviewResult.add(new caseobj(1,"4月開始、作業場所勝どき<br>日本語１級レベル<br>経験3年<br>java"
-	    		  ,"1大手メディア企業向けシステム開発"
-	    		  ,"1営業部隊が使用するシステムの開発運用保守に携わっていただきます。"
-	    		  ,"1java開発経験2年以上"
-	    		  ,"1要件定義の経験や知見"
-	    		  ,"14月～(長期可能)"
-	    		  ,"1最寄：東京"));
-	      interviewResult.add(new caseobj(2,"6月開始、田町<br>日本語１級レベル<br>経験3年<br>java"
-	    		  ,"2大手メディア企業向けシステム開発"
-	    		  ,"2営業部隊が使用するシステムの開発運用保守に携わっていただきます。"
-	    		  ,"2java開発経験2年以上"
-	    		  ,"2要件定義の経験や知見"
-	    		  ,"24月～(長期可能)"
-	    		  ,"2最寄：東京"));
-	      interviewResult.add(new caseobj(3,"7月開始、東京<br>日本語１級レベル<br>経験3年<br>.net"
-	    		  ,"3大手メディア企業向けシステム開発"
-	    		  ,"3営業部隊が使用するシステムの開発運用保守に携わっていただきます。"
-	    		  ,"3java開発経験2年以上"
-	    		  ,"3要件定義の経験や知見"
-	    		  ,"34月～(長期可能)"
-	    		  ,"3最寄：東京"));
-	      interviewResult.add(new caseobj(4,"8月開始、横浜<br>日本語１級レベル<br>経験3年<br>python"
-	    		  ,"4大手メディア企業向けシステム開発"
-	    		  ,"4営業部隊が使用するシステムの開発運用保守に携わっていただきます。"
-	    		  ,"4java開発経験2年以上"
-	    		  ,"4要件定義の経験や知見"
-	    		  ,"44月～(長期可能)"
-	    		  ,"4最寄：東京"));
-	      interviewResult.add(new caseobj(5,"9月開始、多摩川<br>日本語１級レベル<br>経験3年<br>java"
-	    		  ,"5大手メディア企業向けシステム開発"
-	    		  ,"5営業部隊が使用するシステムの開発運用保守に携わっていただきます。"
-	    		  ,"5java開発経験2年以上"
-	    		  ,"5要件定義の経験や知見"
-	    		  ,"54月～(長期可能)"
-	    		  ,"5最寄：東京"));
-	      interviewResult.add(new caseobj(6,"10月開始、操他的<br>日本語１級レベル<br>経験3年<br>shell"
-	    		  ,"6大手メディア企業向けシステム開発"
-	    		  ,"6営業部隊が使用するシステムの開発運用保守に携わっていただきます。"
-	    		  ,"6java開発経験2年以上"
-	    		  ,"6要件定義の経験や知見"
-	    		  ,"64月～(長期可能)"
-	    		  ,"6最寄：東京"));
-	      interviewResult.add(new caseobj(7,"11月開始、日妹<br>日本語１級レベル<br>経験3年<br>java"
-	    		  ,"7大手メディア企業向けシステム開発"
-	    		  ,"7営業部隊が使用するシステムの開発運用保守に携わっていただきます。"
-	    		  ,"7java開発経験2年以上"
-	    		  ,"7要件定義の経験や知見"
-	    		  ,"74月～(長期可能)"
-	    		  ,"7最寄：東京"));
-	      interviewResult.add(new caseobj(8,"12月開始、日姉姉<br>日本語１級レベル<br>経験3年<br>java"
-	    		  ,"8大手メディア企業向けシステム開発"
-	    		  ,"8営業部隊が使用するシステムの開発運用保守に携わっていただきます。"
-	    		  ,"8java開発経験2年以上"
-	    		  ,"8要件定義の経験や知見"
-	    		  ,"84月～(長期可能)"
-	    		  ,"8最寄：東京"));
-
-	        return interviewResult;
+	        return cities;
 	    }
 
 	    @CrossOrigin
@@ -374,7 +264,7 @@ public class HeroController {
 	    @CrossOrigin
 	    @RequestMapping(value = "/getskillinfo", method = RequestMethod.GET)
 	    public Skill getSkillInfo(@RequestParam   String userid) {
-	    
+	         
 	         Map<String, Object> param = new HashMap<String, Object>();
 	         param.put("PERSON_ID", userid);
 	         
@@ -393,7 +283,47 @@ public class HeroController {
 	         return skills;
 	         // return new JsonModelTable(skillList.size(), skillList);
 	    }
-	    
+	    @CrossOrigin
+	    @RequestMapping(value = "/getskillsource", method = RequestMethod.GET)
+	    public Map getskillsource() {
+	    	
+	    	 Map<String, Object> param = new HashMap<String, Object>();
+	         param.put("type", 1);
+	         List<String> language= peopleService.selectList("hrms.people.selectskills",param,null);
+	         
+	         param.put("type", 2);
+	         List<String> dbs= peopleService.selectList("hrms.people.selectskills",param,null);
+	         
+	         param.put("type", 3);
+	         List<String> oss= peopleService.selectList("hrms.people.selectskills",param,null);
+
+	        Map mmMap=new HashMap<String, List>();
+	        mmMap.put("language", language);
+	        mmMap.put("db", dbs);
+	        mmMap.put("os", oss);
+	        return mmMap;
+	    }
+	    @CrossOrigin
+	    @RequestMapping(value = "/getskillsourceNoKBN", method = RequestMethod.GET)
+	    public Map getskillsourceNoKBN() {
+	    	
+	    	 Map<String, Object> param = new HashMap<String, Object>();
+	         param.put("type", 1);
+	         List<String> language= peopleService.selectList("hrms.people.selectskills",param,null);
+	         
+	         param.put("type", 2);
+	         List<String> dbs= peopleService.selectList("hrms.people.selectskills",param,null);
+	         
+	         param.put("type", 3);
+	         List<String> oss= peopleService.selectList("hrms.people.selectskills",param,null);
+	         List<String> resultList=new ArrayList<String>();
+	         resultList.addAll(language);
+	         resultList.addAll(dbs);
+	         resultList.addAll(oss);
+	        Map mmMap=new HashMap<String, List>();
+	        mmMap.put("skills", resultList);
+	        return mmMap;
+	    }
 	    @CrossOrigin
 	    @RequestMapping(value = "/getcarearinfo", method = RequestMethod.GET)
 	    public List<PeopleProject> getCarearInfo(@RequestParam   String userid) {

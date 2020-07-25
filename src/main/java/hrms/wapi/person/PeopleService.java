@@ -81,6 +81,20 @@ public class PeopleService extends HrmsSimpleDaoService {
 	}
 	
 	@Transactional("hrms.tx")
+	public int updatePersonal(PeopleBase baseinfo) {
+		// 面接情報更新
+		return super.updateFree(false, baseinfo,
+				new String[] {
+						"NAME_PRIVACY",
+						"TEL_PRIVACY",
+						"MAIL_PRIVACY",
+						"BIRTHDAY_PRIVACY",
+						"COMPANY_PRIVACY",
+		                 },
+						"PERSON_ID"
+						);
+	}
+	@Transactional("hrms.tx")
 	public int deleteSkillInfo(PeopleSkill skillinfo) {
 		// 面接情報更新
 		return super.deleteFree(false, skillinfo,
