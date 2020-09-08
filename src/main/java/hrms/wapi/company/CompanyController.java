@@ -6,6 +6,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import af.base.controller.BaseController;
 import af.base.model.JsonModel;
-import af.main.model.Login;
 import hrms.model.Company;
+import hrms.model.Login;
 
 /*************************************************************************
  * Copyright     Asatecx Co.,Ltd.<br/>
@@ -38,16 +39,30 @@ public class CompanyController extends BaseController  {
     	company.setUserId(company.getMail());
 
     	Login login = new Login();
-    	login.setUSER_ID(company.getUserId());
-    	login.setPASSWORD(company.getPassword());
-    	login.setUSER_TYPE("2");
-    	login.setVALID_FLG("1");
+    	login.setUserId(company.getUserId());
+    	login.setPassword(company.getPassword());
+    	login.setUserType("2");
+    	login.setValidFlg("0");
 
     	boolean ret = companyService.registCompany(company, login);
     	if (!ret) {
             return new JsonModel(false, "会社重複登録");
         }
         return new JsonModel(true, "会社登録成功。");
+    }
+
+    @RequestMapping(value = "/company/activate/{mailaddr}/{validateCode}", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+    public JsonModel activate(@PathVariable String mailaddr, @PathVariable String validateCode) throws Exception {
+
+    	Login login = new Login();
+    	login.setUserId(mailaddr);
+    	login.setValidFlg("1");
+
+    	boolean ret = companyService.activateCompany(login, validateCode);
+    	if (!ret) {
+            return new JsonModel(false, "認証情報が間違いました。も一回確認お願いいたします。");
+        }
+        return new JsonModel(true, "認証しました。");
     }
 
 }

@@ -19,4 +19,6 @@ public class Login extends BaseDataModel {
 
     private String validFlg;
 
+    private String validateCode;
+
 }

@@ -23,6 +23,7 @@ import af.base.model.mail.Mail;
 import af.base.orm.annotation.ClientDetail;
 import af.base.service.mail.SendEmailService;
 import af.base.util.InputCheckUtil;
+import hrms.model.Constants;
 import hrms.model.PeopleBase;
 import hrms.wapi.person.PeopleService;
 
@@ -76,7 +77,10 @@ public class LoginController extends BaseController {
         if (user == null) {
             return new JsonModel(false, this.getMessage("main.login.error.mailPwd"));
         }
-
+        // アカウント有効性チェック
+        if (!Constants.VALID_FLG_TRUE.equals(user.getValidFlg())) {
+            return new JsonModel(false, this.getMessage("アカウント認証されていません。"));
+        }
         // vパスワードチェック
 //      if (!StringUtil.digestMessage(password, userId).equals(user.getUSER_PASSWORD())) {
         if (!password.equals(user.getPassword())) {

@@ -3,7 +3,6 @@ package hrms.wapi.login;
 import org.springframework.stereotype.Service;
 
 import hrms.model.Company;
-import hrms.model.Constants;
 import hrms.model.Login;
 import hrms.model.PeopleBase;
 import hrms.wapi.base.HrmsSimpleDaoService;
@@ -28,13 +27,13 @@ public class LoginService extends HrmsSimpleDaoService {
         Login user = new Login();
         user.setUserId(userId);
         user = baseDao.find(user);
-        if (user != null) {
-            if (!Constants.VALID_FLG_TRUE.equals(user.getValidFlg())) {
-                user = null;
-            } else {
-                // TODO Somethig
-            }
-        }
+//        if (user != null) {
+//            if (!Constants.VALID_FLG_TRUE.equals(user.getValidFlg())) {
+//                user = null;
+//            } else {
+//                // TODO Somethig
+//            }
+//        }
         return user;
     }
     
