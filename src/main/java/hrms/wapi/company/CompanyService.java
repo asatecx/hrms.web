@@ -10,6 +10,7 @@ import af.base.service.mail.SendEmailService;
 import af.base.util.MD5Util;
 import af.main.model.User;
 import hrms.model.Company;
+import hrms.model.CompanyCase;
 import hrms.model.Constants;
 import hrms.model.Login;
 import hrms.wapi.base.HrmsSimpleDaoService;
@@ -124,5 +125,22 @@ public class CompanyService extends HrmsSimpleDaoService {
 
 		return "mail";
 	}
+
+    /**
+     * get company info.
+     * @param companyId company Id
+     * @return Company info
+     */
+    @Transactional("hrms.tx")
+    public boolean registCase(CompanyCase companyCase) {
+		CompanyCase checkCase = super.find(companyCase);
+		if (checkCase != null) {
+			return false;
+		}
+		int newCaseId = baseDao.selectOne("hrms.company.selectNewCaseId", companyCase, null);
+		companyCase.setCaseId(newCaseId);
+		super.insert(true, companyCase);
+		return true;
+    }
 
 }

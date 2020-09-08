@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import af.base.controller.BaseController;
 import af.base.model.JsonModel;
 import hrms.model.Company;
+import hrms.model.CompanyCase;
 import hrms.model.Login;
 
 /*************************************************************************
@@ -63,6 +64,17 @@ public class CompanyController extends BaseController  {
             return new JsonModel(false, "認証情報が間違いました。も一回確認お願いいたします。");
         }
         return new JsonModel(true, "認証しました。");
+}
+    @RequestMapping(value = "/company/case/regist", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)
+    public JsonModel registCase(@RequestBody Map<String, Object> param) throws Exception {
+    	CompanyCase companyCase = new CompanyCase();
+    	BeanUtils.populate(companyCase, param);
+    	companyCase.setValidFlg("1");
+    	boolean ret = companyService.registCase(companyCase);
+    	if (!ret) {
+            return new JsonModel(false, "案件重複登録。");
+        }
+        return new JsonModel(true, "案件登録成功。");
     }
 
 }
