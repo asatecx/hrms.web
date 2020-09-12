@@ -94,6 +94,12 @@ public class InterviewController extends BaseController  {
         return new JsonModel(true, "面談キャンセルしました。");
     }
 
+    @RequestMapping(value = "/interview/casename", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)
+    public JsonModel getCaseName(@RequestBody Map<String, Object> param) throws Exception {
+    	List<Map<String, Object>> caseNames = interviewService.selectList("hrms.company.selectCaseName", param, null);
+    	return new JsonModelTable(caseNames.size(), caseNames);
+    }
+
 //    private Timestamp convertTimestamp(String before) {
 //    	Timestamp ts = null;
 //    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS+0000");

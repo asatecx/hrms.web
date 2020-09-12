@@ -230,4 +230,17 @@
           USERID = #{userId}
     </select>
 
+    <select id="selectCaseName" parameterType="map" resultType="map">
+      SELECT
+          SEQ AS value,
+          CASENAME AS label
+      FROM
+          T_B_CASE
+      WHERE
+          VALIDFLG = '1'
+          <if test="companyId != null">
+            AND USERID = #{companyId}
+          </if>
+    </select>
+
 </mapper>

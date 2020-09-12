@@ -6,14 +6,17 @@ import lombok.Data;
 
 @Data
 @Table(name = "T_B_CASE", schema = "${commonSchema}")
-public class CompanyCase extends BaseDataModel {
+public class Case extends BaseDataModel {
 
     private static final long serialVersionUID = -6904741621609174058L;
 
     private String userId;
-    private int caseId;
-    private String caseName;
+    private int seq;
+    private String casename;
+    private String workplace;
     private String workcontent;
+    private String startdate;
+    private String enddate;
     private String memo;
     private String validFlg;
 
