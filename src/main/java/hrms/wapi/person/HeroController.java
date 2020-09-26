@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.aspectj.weaver.ast.And;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 
 import af.base.model.JsonModel;
 import hrms.model.Carear;
@@ -35,7 +38,7 @@ public class HeroController {
 
 	//private HeroService heroService;
 	public String useridString;
-	
+	private  double weight;
 	@Autowired
     @Qualifier("hrms.peopleService")
     protected PeopleService peopleService;
@@ -57,6 +60,20 @@ public class HeroController {
 	    	}
 
 	    }
+	    
+//	    @CrossOrigin
+//	    @RequestMapping(value = "/moveflg",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+//	    public String modifymoveinfo(@ModelAttribute  PeopleBase moveinfo) {
+//	    	System.out.println(moveinfo.getMoveupldflg());
+//	    	int count=peopleService.updatemoveinfo(moveinfo);
+//	    	if(count>=1) {
+//	    		return "OK";
+//	    	}else {
+//	    		return "NG";
+//	    	}
+//
+//	    }
+	    
 	    
 	    @CrossOrigin
 	    @RequestMapping(value = "/baseinfo",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
@@ -335,6 +352,51 @@ public class HeroController {
 			}
 	         return carearList;
 	    }
-	    
+	    @CrossOrigin
+	    @RequestMapping(value = "/getkanseidoinfo", method = RequestMethod.GET)
+	    public int  getcompletepercent(@RequestParam   String userid) {
+	         Map<String, Object> param = new HashMap<String, Object>();
+	         weight=0;
+	       
+	         param.put("PERSON_ID", userid);
+	   
+	         
+	         param.put("SKILLKBN", "LAN");
+	         List<PeopleSkill> lanList= peopleService.selectList("hrms.people.selectPeopleSkillList",param,null);
+	         param.put("SKILLKBN", "OS");
+	         List<PeopleSkill> osList= peopleService.selectList("hrms.people.selectPeopleSkillList",param,null);
+	         param.put("SKILLKBN", "DB");
+	         List<PeopleSkill> dbList= peopleService.selectList("hrms.people.selectPeopleSkillList",param,null);
+	        
+	         if(lanList.size()>0) {
+	        	 weight++;
+	         }
+	         if(lanList.size()>0) {
+	        	 weight++;
+	         }
+	         if(dbList.size()>0) {
+	        	 weight++;
+	         }
+     
+	         param.put("PERSON_ID", userid);
+	         List<PeopleProject> carearList= peopleService.selectList("hrms.people.selectPeopleCarearList",param,null);
+	         if(carearList.size()>0) {
+	        	 weight++;
+	         }
+	       	 PeopleBase user =new PeopleBase();
+	         user.setPerson_id(userid);
+	         PeopleBase result= peopleService.find(user);
+	         if(result.getUser_name_roma()!=null) {
+	        	 weight++;
+	         }
+	         if(result.getPrice_max()!=null && result.getPrice_min()!=null) {
+	        	 weight++;
+	         }
+	         if("1".equals(result.getMoveupldflg())) {
+	        	 weight++;
+	         }
+	         
+	        return (int)((weight/7)*100);
+	    }
 
 }

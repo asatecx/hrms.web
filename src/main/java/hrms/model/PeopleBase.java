@@ -42,5 +42,6 @@ public class PeopleBase extends BaseDataModel{
 	private String	mail_privacy;
 	private String	birthday_privacy;
 	private String	company_privacy;
+	private String  moveupldflg;
 
 }

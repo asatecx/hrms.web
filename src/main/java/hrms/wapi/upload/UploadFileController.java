@@ -1,19 +1,17 @@
 package hrms.wapi.upload;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.sql.Timestamp;
 import java.text.MessageFormat;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
@@ -26,6 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import af.base.controller.BaseController;
 import af.base.model.JsonModel;
+import hrms.model.PeopleBase;
+import hrms.wapi.person.PeopleService;
 
 /*************************************************************************
  * Copyright     Asatecx Co.,Ltd.<br/>
@@ -46,6 +46,11 @@ public class UploadFileController extends BaseController {
      * @return JsonModel
      * @throws IOException IOException.
      */
+	
+	@Autowired
+    @Qualifier("hrms.peopleService")
+    protected PeopleService peopleService;
+	
     @RequestMapping(value = "/video/upload", method = RequestMethod.PUT,  produces = MediaType.APPLICATION_JSON_VALUE)
     public JsonModel upoad(@RequestParam MultipartFile uploadfile) throws IOException {
         if (uploadfile.isEmpty()) return new JsonModel(false, "No file updated");
@@ -100,6 +105,13 @@ public class UploadFileController extends BaseController {
 	            Path destpath= Paths.get(path+username+".mp4");
 	            System.out.println(destpath);
 	            Files.copy(file.getInputStream(), destpath, StandardCopyOption.REPLACE_EXISTING);
+	            PeopleBase moveinfo = new PeopleBase();
+	            moveinfo.setPerson_id(username);
+	            moveinfo.setMoveupldflg("1");
+	            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+	            moveinfo.setUPDATE_DATE_TIME(timestamp);
+	            int count=peopleService.updatemoveinfo(moveinfo);
+	            System.out.println(count);
         } catch (Exception e) {
             // 異常終了時の処理
         	System.out.println(e);
