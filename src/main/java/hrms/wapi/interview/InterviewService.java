@@ -70,6 +70,11 @@ public class InterviewService extends HrmsSimpleDaoService {
 		super.updateFree(true, interview,
 				new String[] {
 						"INTERVIEW_RESULT",
+						"RATETOCOMPANY",
+						"MESSAGETOCOMPANY",
+						"INTERVIEW_DATE",
+						"START_TIME",
+						"END_TIME",
 						"UPDATE_USER",
 						"UPDATED_BY",
 						"UPDATE_DATE_TIME" },

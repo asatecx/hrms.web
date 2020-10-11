@@ -2,6 +2,7 @@ package hrms.wapi.person;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -167,7 +168,10 @@ public class HeroController {
 	         param.put("mylimit", pagesize);
 	         param.put("myoffset", pagesize*(currentPage-1));
 	         List<Interview> interviewList= peopleService.selectList("hrms.people.selectInterviewList",param,null);
-
+//	         for (Iterator iterator = interviewList.iterator(); iterator.hasNext();) {
+//				Interview interview = (Interview) iterator.next();
+//				interview.setInterviewtimeList();
+//			}
 	         return interviewList;
 	    }
 	    

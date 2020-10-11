@@ -94,7 +94,15 @@
           ,INTERVIEW_DATE as interviewdate
           ,START_TIME as starttime
           ,END_TIME as endtime
-          ,CONCAT(INTERVIEW_DATE,'　　',START_TIME,'～',END_TIME) AS INTERVIEW_DATETIME
+          ,INTERVIEW_DATE1 as interviewdate1
+          ,START_TIME1 as starttime1
+          ,END_TIME1 as endtime1
+          ,INTERVIEW_DATE2 as interviewdate2
+          ,START_TIME2 as starttime2
+          ,END_TIME2 as endtime2
+          ,INTERVIEW_DATE3 as interviewdate3
+          ,START_TIME3 as starttime3
+          ,END_TIME3 as endtime3
           ,WORK_CONTENTS as workcontents
           ,CASE INTERVIEW_RESULT
 WHEN '1' THEN '招待された'
@@ -113,6 +121,8 @@ ELSE 'なし' END as interviewresult
           ,UPDATE_DATE_TIME 
           ,CREATED_BY
           ,UPDATED_BY
+           ,rateToCompany as rateToCompany
+            ,messageToCompany as messageToCompany
       FROM
           T_B_INTERVIEW
       WHERE

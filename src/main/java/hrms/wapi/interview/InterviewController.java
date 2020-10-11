@@ -76,8 +76,12 @@ public class InterviewController extends BaseController  {
     	Timestamp ts = DateTimeUtil.parseTimestamp((String)param.get("UPDATE_DATE_TIME"));
     	SqlTimestampConverter converter = new SqlTimestampConverter(ts);
     	ConvertUtils.register(converter, Timestamp.class);
+    	
     	BeanUtils.populate(interview, param);
+    	
     	interview.setBaseInfo(interview.getCompanyId(), null);
+    	interview.setInterview_datetime(param.get("interview_datetime").toString());
+    	interview.setinterviewtime();
     	interviewService.deleteInterview(interview);
         return new JsonModel(true, "面談結果を更新しました。");
     }
